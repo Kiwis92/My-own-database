@@ -1,0 +1,143 @@
+{% extends "admin/base.html" %}
+{% block title %}Belofte #{{ promise.id }}{% endblock %}
+{% block header_title %}Belofte bewerken{% endblock %}
+{% block header_actions %}
+<a href="/belofte/{{ promise.id }}" target="_blank" class="btn btn-ghost">Publieke pagina ↗</a>
+<a href="/admin/beloftes" class="btn btn-ghost">← Terug</a>
+{% endblock %}
+
+{% block content %}
+<div class="admin-grid-2">
+    <!-- Edit form -->
+    <div class="admin-card form-card">
+        <h2 class="card-section-title">Belofte details</h2>
+        <form method="post" action="/admin/beloftes/{{ promise.id }}/bewerk">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Kabinet *</label>
+                    <select name="cabinet_id" class="form-select" required>
+                        {% for cab in cabinets %}
+                        <option value="{{ cab.id }}" {% if cab.id == promise.cabinet_id %}selected{% endif %}>{{ cab.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Partij</label>
+                    <select name="party_id" class="form-select">
+                        <option value="">Heel kabinet / coalitie</option>
+                        {% for party in parties %}
+                        <option value="{{ party.id }}" {% if promise.party_id == party.id %}selected{% endif %}>{{ party.name }} ({{ party.abbreviation }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Titel / belofte *</label>
+                <input type="text" name="title" class="form-input" value="{{ promise.title }}" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Categorie</label>
+                    <select name="category" class="form-select">
+                        {% for cat in categories %}
+                        <option value="{{ cat.name }}" {% if cat.name == promise.category.name %}selected{% endif %}>{{ cat.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select status-select" id="statusSelect">
+                        {% for s in statuses %}
+                        <option value="{{ s.name }}" {% if s.name == promise.status.name %}selected{% endif %}>{{ s.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Omschrijving</label>
+                <textarea name="description" class="form-textarea" rows="4">{{ promise.description or '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Originele tekst uit akkoord</label>
+                <textarea name="source_text" class="form-textarea" rows="3">{{ promise.source_text or '' }}</textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+                <form method="post" action="/admin/beloftes/{{ promise.id }}/verwijder" class="inline-form" onsubmit="return confirm('Weet je zeker dat je deze belofte wilt verwijderen?')">
+                    <button type="submit" class="btn btn-danger">Verwijder belofte</button>
+                </form>
+            </div>
+        </form>
+    </div>
+
+    <!-- Evidence -->
+    <div class="admin-card">
+        <h2 class="card-section-title">Bewijsbronnen ({{ promise.evidence|length }})</h2>
+
+        {% if promise.evidence %}
+        <div class="evidence-admin-list">
+            {% for ev in promise.evidence %}
+            <div class="evidence-admin-item">
+                <div class="evidence-admin-header">
+                    <div>
+                        <strong>{{ ev.title }}</strong>
+                        {% if ev.source_type %}<span class="evidence-type">{{ ev.source_type }}</span>{% endif %}
+                    </div>
+                    <form method="post" action="/admin/bewijs/{{ ev.id }}/verwijder" class="inline-form" onsubmit="return confirm('Bron verwijderen?')">
+                        <button type="submit" class="btn btn-danger btn-xs">✕</button>
+                    </form>
+                </div>
+                {% if ev.url %}<a href="{{ ev.url }}" target="_blank" class="evidence-url" rel="noopener">{{ ev.url[:60] }}{% if ev.url|length > 60 %}...{% endif %} ↗</a>{% endif %}
+                {% if ev.description %}<p class="evidence-desc-sm">{{ ev.description }}</p>{% endif %}
+                {% if ev.date_published %}<span class="evidence-date">{{ ev.date_published.strftime('%d %b %Y') }}</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="admin-hint">Nog geen bronnen toegevoegd.</p>
+        {% endif %}
+
+        <div class="evidence-add-form">
+            <h3>Bron toevoegen</h3>
+            <form method="post" action="/admin/beloftes/{{ promise.id }}/bewijs/nieuw">
+                <div class="form-group">
+                    <label class="form-label">Titel *</label>
+                    <input type="text" name="title" class="form-input" required placeholder="bijv. Wet op de AOW-leeftijd aangenomen">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">URL</label>
+                    <input type="url" name="url" class="form-input" placeholder="https://...">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Type bron</label>
+                        <select name="source_type" class="form-select">
+                            <option value="">Selecteer type</option>
+                            <option>Wetgeving</option>
+                            <option>Persbericht</option>
+                            <option>Nieuwsartikel</option>
+                            <option>Kamerstuk</option>
+                            <option>Rapport</option>
+                            <option>Overig</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Datum publicatie</label>
+                        <input type="date" name="date_published" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Toelichting</label>
+                    <textarea name="description" class="form-textarea" rows="2" placeholder="Korte uitleg waarom dit bewijs relevant is"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Bron toevoegen</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

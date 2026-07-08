@@ -1,0 +1,62 @@
+{% extends "admin/base.html" %}
+{% block title %}{% if cabinet %}Kabinet bewerken{% else %}Kabinet toevoegen{% endif %}{% endblock %}
+{% block header_title %}{% if cabinet %}Kabinet bewerken{% else %}Kabinet toevoegen{% endif %}{% endblock %}
+{% block header_actions %}<a href="/admin/kabinetten" class="btn btn-ghost">← Terug</a>{% endblock %}
+
+{% block content %}
+<div class="admin-card form-card">
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="{% if cabinet %}/admin/kabinetten/{{ cabinet.id }}/bewerk{% else %}/admin/kabinetten/nieuw{% endif %}">
+        <div class="form-group">
+            <label class="form-label">Naam kabinet *</label>
+            <input type="text" name="name" class="form-input" value="{{ cabinet.name if cabinet else '' }}" required placeholder="bijv. Kabinet-Schoof">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Startjaar *</label>
+                <input type="number" name="year_start" class="form-input" value="{{ cabinet.year_start if cabinet else '' }}" required placeholder="bijv. 2024" min="1900" max="2100">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Eindjaar</label>
+                <input type="number" name="year_end" class="form-input" value="{{ cabinet.year_end if cabinet and cabinet.year_end else '' }}" placeholder="Leeg = huidig" min="1900" max="2100">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Coalitiepartijen</label>
+            <div class="checkbox-grid">
+                {% for party in parties %}
+                <label class="checkbox-item">
+                    <input type="checkbox" name="party_ids" value="{{ party.id }}"
+                        {% if cabinet and party.id in selected_party_ids %}checked{% endif %}>
+                    <span class="party-chip" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">{{ party.abbreviation }}</span>
+                    {{ party.name }}
+                </label>
+                {% endfor %}
+            </div>
+            {% if not parties %}
+            <p class="form-hint">Voeg eerst partijen toe. <a href="/admin/partijen/nieuw">Partij toevoegen →</a></p>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Omschrijving</label>
+            <textarea name="description" class="form-textarea" rows="4" placeholder="Korte omschrijving van het kabinet en haar agenda">{{ cabinet.description if cabinet else '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Link regeerakkoord</label>
+            <input type="url" name="coalition_agreement_url" class="form-input" value="{{ cabinet.coalition_agreement_url if cabinet and cabinet.coalition_agreement_url else '' }}" placeholder="https://...">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">{% if cabinet %}Opslaan{% else %}Toevoegen{% endif %}</button>
+            <a href="/admin/kabinetten" class="btn btn-ghost">Annuleren</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

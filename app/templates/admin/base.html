@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Beheer{% endblock %} – PoliTrack Admin</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">⚖</span>
+                    <span>PoliTrack</span>
+                </a>
+                <span class="admin-label">Beheer</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="/admin" class="admin-nav-item {% if request.url.path == '/admin' %}active{% endif %}">
+                    <span class="nav-icon">📊</span> Dashboard
+                </a>
+                <a href="/admin/beloftes" class="admin-nav-item {% if '/admin/beloftes' in request.url.path %}active{% endif %}">
+                    <span class="nav-icon">📋</span> Beloftes
+                </a>
+                <a href="/admin/kabinetten" class="admin-nav-item {% if '/admin/kabinetten' in request.url.path %}active{% endif %}">
+                    <span class="nav-icon">🏛</span> Kabinetten
+                </a>
+                <a href="/admin/partijen" class="admin-nav-item {% if '/admin/partijen' in request.url.path %}active{% endif %}">
+                    <span class="nav-icon">🏴</span> Partijen
+                </a>
+                <hr class="admin-nav-divider">
+                <a href="/" class="admin-nav-item" target="_blank">
+                    <span class="nav-icon">🌐</span> Publieke site
+                </a>
+                <a href="/admin/logout" class="admin-nav-item admin-nav-logout">
+                    <span class="nav-icon">🚪</span> Uitloggen
+                </a>
+            </nav>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-header">
+                <div class="admin-header-title">{% block header_title %}Dashboard{% endblock %}</div>
+                <div class="admin-header-actions">{% block header_actions %}{% endblock %}</div>
+            </header>
+            <div class="admin-content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/admin.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

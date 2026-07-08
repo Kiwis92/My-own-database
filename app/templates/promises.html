@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Beloftes{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Politieke Beloftes</h1>
+        <p>{{ pagination.total }} beloftes gevonden</p>
+    </div>
+</div>
+
+<div class="container page-body">
+    <div class="layout-sidebar">
+        <!-- Filters -->
+        <aside class="filters-panel">
+            <h3 class="filters-title">Filteren</h3>
+            <form method="get" action="/beloftes" id="filterForm">
+                <div class="filter-group">
+                    <label class="filter-label">Zoeken</label>
+                    <input type="text" name="search" value="{{ filters.search or '' }}" placeholder="Zoek op trefwoord..." class="filter-input">
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Kabinet</label>
+                    <select name="cabinet_id" class="filter-select">
+                        <option value="">Alle kabinetten</option>
+                        {% for cab in cabinets %}
+                        <option value="{{ cab.id }}" {% if filters.cabinet_id == cab.id %}selected{% endif %}>{{ cab.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Partij</label>
+                    <select name="party_id" class="filter-select">
+                        <option value="">Alle partijen</option>
+                        {% for party in parties %}
+                        <option value="{{ party.id }}" {% if filters.party_id == party.id %}selected{% endif %}>{{ party.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Status</label>
+                    <div class="status-filters">
+                        <label class="status-filter-item">
+                            <input type="radio" name="status" value="" {% if not filters.status %}checked{% endif %}> Alle
+                        </label>
+                        {% for s in statuses %}
+                        <label class="status-filter-item">
+                            <input type="radio" name="status" value="{{ s.name }}" {% if filters.status == s.name %}checked{% endif %}>
+                            <span class="status-badge status-{{ s.name }}">{{ s.value }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Categorie</label>
+                    <select name="category" class="filter-select">
+                        <option value="">Alle categorieën</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat.name }}" {% if filters.category == cat.name %}selected{% endif %}>{{ cat.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Filteren</button>
+                <a href="/beloftes" class="btn btn-ghost btn-block">Wis filters</a>
+            </form>
+        </aside>
+
+        <!-- Promises list -->
+        <div class="promises-list">
+            {% if promises %}
+                {% for promise in promises %}
+                <a href="/belofte/{{ promise.id }}" class="promise-card">
+                    <div class="promise-card-header">
+                        <span class="status-badge status-{{ promise.status.name }}">{{ promise.status.value }}</span>
+                        <span class="promise-category">{{ promise.category.value }}</span>
+                    </div>
+                    <h3 class="promise-title">{{ promise.title }}</h3>
+                    {% if promise.description %}
+                    <p class="promise-desc">{{ promise.description[:160] }}{% if promise.description|length > 160 %}...{% endif %}</p>
+                    {% endif %}
+                    <div class="promise-meta">
+                        <span class="meta-item">🏛 {{ promise.cabinet.name }}</span>
+                        {% if promise.party %}
+                        <span class="meta-item" style="color: {{ promise.party.color }}">● {{ promise.party.abbreviation }}</span>
+                        {% endif %}
+                        {% if promise.evidence %}
+                        <span class="meta-item">📎 {{ promise.evidence|length }} bron{% if promise.evidence|length != 1 %}nen{% endif %}</span>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+
+                <!-- Pagination -->
+                {% if pagination.total_pages > 1 %}
+                <div class="pagination">
+                    {% if pagination.page > 1 %}
+                    <a href="?{% for k,v in filters.items() %}{% if v %}{{ k }}={{ v }}&{% endif %}{% endfor %}page={{ pagination.page - 1 }}" class="page-btn">← Vorige</a>
+                    {% endif %}
+                    <span class="page-info">Pagina {{ pagination.page }} van {{ pagination.total_pages }}</span>
+                    {% if pagination.page < pagination.total_pages %}
+                    <a href="?{% for k,v in filters.items() %}{% if v %}{{ k }}={{ v }}&{% endif %}{% endfor %}page={{ pagination.page + 1 }}" class="page-btn">Volgende →</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">🔍</div>
+                <h3>Geen beloftes gevonden</h3>
+                <p>Probeer andere filters of zoektermen.</p>
+                <a href="/beloftes" class="btn btn-ghost">Wis filters</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "admin/base.html" %}
+{% block title %}Belofte toevoegen{% endblock %}
+{% block header_title %}Belofte toevoegen{% endblock %}
+{% block header_actions %}<a href="/admin/beloftes" class="btn btn-ghost">← Terug</a>{% endblock %}
+
+{% block content %}
+<div class="admin-card form-card">
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="/admin/beloftes/nieuw">
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Kabinet *</label>
+                <select name="cabinet_id" class="form-select" required>
+                    <option value="">Selecteer kabinet</option>
+                    {% for cab in cabinets %}
+                    <option value="{{ cab.id }}">{{ cab.name }}</option>
+                    {% endfor %}
+                </select>
+                {% if not cabinets %}<p class="form-hint"><a href="/admin/kabinetten/nieuw">Voeg eerst een kabinet toe →</a></p>{% endif %}
+            </div>
+            <div class="form-group">
+                <label class="form-label">Partij</label>
+                <select name="party_id" class="form-select">
+                    <option value="">Heel kabinet / coalitie</option>
+                    {% for party in parties %}
+                    <option value="{{ party.id }}">{{ party.name }} ({{ party.abbreviation }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Titel / belofte *</label>
+            <input type="text" name="title" class="form-input" required placeholder="bijv. De AOW-leeftijd wordt niet verhoogd in deze kabinetsperiode">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Categorie</label>
+                <select name="category" class="form-select">
+                    {% for cat in categories %}
+                    <option value="{{ cat.name }}">{{ cat.value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select">
+                    {% for s in statuses %}
+                    <option value="{{ s.name }}" {% if s.name == 'beloofd' %}selected{% endif %}>{{ s.value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Omschrijving</label>
+            <textarea name="description" class="form-textarea" rows="4" placeholder="Uitgebreidere uitleg van de belofte en de context"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Originele tekst uit akkoord</label>
+            <textarea name="source_text" class="form-textarea" rows="3" placeholder="Exacte citaat uit het regeerakkoord (optioneel)"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Toevoegen</button>
+            <a href="/admin/beloftes" class="btn btn-ghost">Annuleren</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

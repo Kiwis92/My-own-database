@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+{% block title %}Partijen{% endblock %}
+{% block header_title %}Partijen{% endblock %}
+{% block header_actions %}<a href="/admin/partijen/nieuw" class="btn btn-primary">+ Partij toevoegen</a>{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+    {% if parties %}
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Kleur</th>
+                    <th>Naam</th>
+                    <th>Afkorting</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for party in parties %}
+                <tr>
+                    <td><span class="color-dot" style="background: {{ party.color }}"></span></td>
+                    <td><strong>{{ party.name }}</strong></td>
+                    <td>
+                        <span class="party-chip" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">
+                            {{ party.abbreviation }}
+                        </span>
+                    </td>
+                    <td class="actions-cell">
+                        <a href="/admin/partijen/{{ party.id }}/bewerk" class="btn btn-ghost btn-sm">Bewerken</a>
+                        <form method="post" action="/admin/partijen/{{ party.id }}/verwijder" class="inline-form" onsubmit="return confirm('Weet je zeker dat je {{ party.name }} wilt verwijderen?')">
+                            <button type="submit" class="btn btn-danger btn-sm">Verwijder</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="admin-empty">
+        <p>Nog geen partijen. <a href="/admin/partijen/nieuw">Voeg de eerste toe.</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inloggen – PoliTrack Beheer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body class="login-body">
+    <div class="login-card">
+        <div class="login-brand">
+            <span class="brand-icon-lg">⚖</span>
+            <h1>PoliTrack</h1>
+            <p>Beheerdersingang</p>
+        </div>
+        {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+        {% endif %}
+        <form method="post" action="/admin/login" class="login-form">
+            <div class="form-group">
+                <label class="form-label">Wachtwoord</label>
+                <input type="password" name="password" class="form-input" placeholder="Voer wachtwoord in" autofocus required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Inloggen</button>
+        </form>
+        <div class="login-footer">
+            <a href="/">← Terug naar publieke site</a>
+        </div>
+    </div>
+</body>
+</html>
