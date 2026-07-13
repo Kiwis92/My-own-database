@@ -1,0 +1,2429 @@
+{
+  "partijen": [
+    {
+      "id": "VVD",
+      "naam": "Volkspartij voor Vrijheid en Democratie",
+      "ideologie": "Liberaal-conservatief",
+      "kleur": "#003082",
+      "opgericht": 1948,
+      "actief": true,
+      "huidigeZetels": 24,
+      "omschrijving": "De VVD is een liberale partij die nadruk legt op persoonlijke vrijheid, ondernemerschap en een sterke markteconomie. Historisch de grootste rechtse partij van Nederland."
+    },
+    {
+      "id": "PvdA",
+      "naam": "Partij van de Arbeid",
+      "ideologie": "Sociaaldemocratie",
+      "kleur": "#E3001A",
+      "opgericht": 1946,
+      "actief": true,
+      "huidigeZetels": 8,
+      "omschrijving": "De PvdA strijdt voor sociale rechtvaardigheid, gelijkheid en een sterk sociaal vangnet. Liep in 2023 als combinatie met GroenLinks."
+    },
+    {
+      "id": "CDA",
+      "naam": "Christen-Democratisch Appèl",
+      "ideologie": "Christendemocratie",
+      "kleur": "#007A5E",
+      "opgericht": 1980,
+      "actief": true,
+      "huidigeZetels": 5,
+      "omschrijving": "De CDA combineert christelijke waarden met een pragmatische bestuursfilosofie. Lange tijd de dominante partij van Nederland."
+    },
+    {
+      "id": "D66",
+      "naam": "Democraten 66",
+      "ideologie": "Progressief liberalisme",
+      "kleur": "#00A651",
+      "opgericht": 1966,
+      "actief": true,
+      "huidigeZetels": 9,
+      "omschrijving": "D66 staat voor democratische vernieuwing, persoonlijke vrijheid en progressieve politiek. Sterk pro-Europa en sociaal-liberaal."
+    },
+    {
+      "id": "GL",
+      "naam": "GroenLinks",
+      "ideologie": "Groen-links",
+      "kleur": "#5AB135",
+      "opgericht": 1990,
+      "actief": true,
+      "huidigeZetels": 16,
+      "omschrijving": "GroenLinks combineert ecologische duurzaamheid met sociale rechtvaardigheid. In 2023 als combinatielijst met PvdA."
+    },
+    {
+      "id": "SP",
+      "naam": "Socialistische Partij",
+      "ideologie": "Socialisme",
+      "kleur": "#FF0000",
+      "opgericht": 1971,
+      "actief": true,
+      "huidigeZetels": 5,
+      "omschrijving": "De SP is een sociaalistische partij die opkomt voor gewone mensen, critisch op marktwerking in de zorg en kritisch op de EU."
+    },
+    {
+      "id": "PVV",
+      "naam": "Partij voor de Vrijheid",
+      "ideologie": "Populistisch rechts",
+      "kleur": "#003882",
+      "opgericht": 2006,
+      "actief": true,
+      "huidigeZetels": 37,
+      "omschrijving": "De PVV van Geert Wilders is een nationalistische partij die kritisch is op islam en immigratie. Grootste partij bij de verkiezingen van 2023."
+    },
+    {
+      "id": "FvD",
+      "naam": "Forum voor Democratie",
+      "ideologie": "Nationaalconservatief",
+      "kleur": "#8B1A1A",
+      "opgericht": 2016,
+      "actief": true,
+      "huidigeZetels": 3,
+      "omschrijving": "FvD van Thierry Baudet is nationaalconservatief en eurosceptisch. Behaalde 13 zetels in 2019 (Senaat) maar verloor daarna terrein."
+    },
+    {
+      "id": "CU",
+      "naam": "ChristenUnie",
+      "ideologie": "Christelijk-sociaal",
+      "kleur": "#49A0D4",
+      "opgericht": 2000,
+      "actief": true,
+      "huidigeZetels": 3,
+      "omschrijving": "De CU combineert christelijke normen en waarden met sociale bewogenheid en milieuverantwoordelijkheid."
+    },
+    {
+      "id": "SGP",
+      "naam": "Staatkundig Gereformeerde Partij",
+      "ideologie": "Orthodox-gereformeerd",
+      "kleur": "#F26522",
+      "opgericht": 1918,
+      "actief": true,
+      "huidigeZetels": 3,
+      "omschrijving": "De SGP is de oudste Nederlandse partij en staat voor een theocratisch bestuur op basis van de Bijbel. Consistent 2–3 zetels."
+    },
+    {
+      "id": "PvdD",
+      "naam": "Partij voor de Dieren",
+      "ideologie": "Dierenrechten / Groen",
+      "kleur": "#006C2E",
+      "opgericht": 2002,
+      "actief": true,
+      "huidigeZetels": 3,
+      "omschrijving": "De PvdD richt zich op dierenrechten, natuur en duurzaamheid als primaire politieke thema's."
+    },
+    {
+      "id": "BBB",
+      "naam": "BoerBurgerBeweging",
+      "ideologie": "Agrarisch-conservatief",
+      "kleur": "#B0C832",
+      "opgericht": 2019,
+      "actief": true,
+      "huidigeZetels": 7,
+      "omschrijving": "BBB ontstond uit boerenprotest en vertegenwoordigt het platteland. Won spectaculair de Provinciale Statenverkiezingen van 2023."
+    },
+    {
+      "id": "NSC",
+      "naam": "Nieuw Sociaal Contract",
+      "ideologie": "Christendemocratisch",
+      "kleur": "#00A0E3",
+      "opgericht": 2023,
+      "actief": true,
+      "huidigeZetels": 20,
+      "omschrijving": "NSC van Pieter Omtzigt richt zich op betrouwbaar bestuur en rechtsstaat. Debuteerde met 20 zetels in november 2023."
+    },
+    {
+      "id": "Volt",
+      "naam": "Volt Nederland",
+      "ideologie": "Paneuropees progressief",
+      "kleur": "#502379",
+      "opgericht": 2018,
+      "actief": true,
+      "huidigeZetels": 2,
+      "omschrijving": "Volt is een pan-Europese beweging die streeft naar een federaal Europa met progressief beleid."
+    },
+    {
+      "id": "JA21",
+      "naam": "Juiste Antwoord 2021",
+      "ideologie": "Nationaal-conservatief",
+      "kleur": "#2D4A8A",
+      "opgericht": 2020,
+      "actief": true,
+      "huidigeZetels": 3,
+      "omschrijving": "JA21 is een afsplitsing van FvD en positioneert zich als gematigd nationaalconservatief."
+    },
+    {
+      "id": "DENK",
+      "naam": "DENK",
+      "ideologie": "Multicultureel progressief",
+      "kleur": "#39A935",
+      "opgericht": 2015,
+      "actief": true,
+      "huidigeZetels": 3,
+      "omschrijving": "DENK richt zich op multiculturele samenleving, gelijkheid en antidiscriminatie, met name voor migrantengemeenschappen."
+    },
+    {
+      "id": "50+",
+      "naam": "50PLUS",
+      "ideologie": "Ouderenbelangen",
+      "kleur": "#7B2D8B",
+      "opgericht": 2009,
+      "actief": true,
+      "huidigeZetels": 1,
+      "omschrijving": "50PLUS behartigt de belangen van 50-plussers, met focus op pensioenen en ouderenzorg."
+    },
+    {
+      "id": "LPF",
+      "naam": "Lijst Pim Fortuyn",
+      "ideologie": "Populistisch rechts",
+      "kleur": "#FF6600",
+      "opgericht": 2002,
+      "actief": false,
+      "huidigeZetels": 0,
+      "omschrijving": "De LPF van de vermoorde Pim Fortuyn behaalde in 2002 26 zetels. De partij viel snel uiteen door interne conflicten."
+    },
+    {
+      "id": "Bij1",
+      "naam": "Bij1",
+      "ideologie": "Anti-racistisch links",
+      "kleur": "#FFCD00",
+      "opgericht": 2016,
+      "actief": true,
+      "huidigeZetels": 1,
+      "omschrijving": "Bij1 strijdt tegen racisme en voor radicale gelijkheid, met focus op Black Lives Matter en intersectionaliteit."
+    },
+    {
+      "id": "GPV",
+      "naam": "Gereformeerd Politiek Verbond",
+      "ideologie": "Gereformeerd-confessioneel",
+      "kleur": "#5A4A2A",
+      "opgericht": 1948,
+      "actief": false,
+      "huidigeZetels": 0,
+      "omschrijving": "De GPV fuseerde in 2001 met RPF en CU. Stond voor gereformeerde beginselen in de politiek."
+    },
+    {
+      "id": "RPF",
+      "naam": "Reformatorische Politieke Federatie",
+      "ideologie": "Reformatorisch",
+      "kleur": "#8B6914",
+      "opgericht": 1975,
+      "actief": false,
+      "huidigeZetels": 0,
+      "omschrijving": "De RPF fuseerde in 2001 met GPV tot de ChristenUnie. Combineerde evangelisch christendom met politiek."
+    }
+  ],
+  "verkiezingen": [
+    {
+      "jaar": 1998,
+      "datum": "1998-05-06",
+      "opkomst": 73.3,
+      "zetels": {
+        "VVD": 38,
+        "PvdA": 45,
+        "CDA": 29,
+        "D66": 14,
+        "GL": 11,
+        "SP": 5,
+        "SGP": 3,
+        "GPV": 2,
+        "RPF": 3,
+        "PvdD": 0
+      }
+    },
+    {
+      "jaar": 2002,
+      "datum": "2002-05-15",
+      "opkomst": 79.1,
+      "zetels": {
+        "VVD": 24,
+        "PvdA": 23,
+        "CDA": 43,
+        "D66": 7,
+        "GL": 10,
+        "SP": 9,
+        "SGP": 2,
+        "CU": 4,
+        "LPF": 26,
+        "PvdD": 0
+      }
+    },
+    {
+      "jaar": 2003,
+      "datum": "2003-01-22",
+      "opkomst": 80,
+      "zetels": {
+        "VVD": 28,
+        "PvdA": 42,
+        "CDA": 44,
+        "D66": 6,
+        "GL": 8,
+        "SP": 9,
+        "SGP": 2,
+        "CU": 3,
+        "LPF": 8,
+        "PvdD": 0
+      }
+    },
+    {
+      "jaar": 2006,
+      "datum": "2006-11-22",
+      "opkomst": 80.4,
+      "zetels": {
+        "VVD": 22,
+        "PvdA": 33,
+        "CDA": 41,
+        "D66": 3,
+        "GL": 7,
+        "SP": 25,
+        "SGP": 2,
+        "CU": 6,
+        "PVV": 9,
+        "PvdD": 2
+      }
+    },
+    {
+      "jaar": 2010,
+      "datum": "2010-06-09",
+      "opkomst": 75.4,
+      "zetels": {
+        "VVD": 31,
+        "PvdA": 30,
+        "CDA": 21,
+        "D66": 10,
+        "GL": 10,
+        "SP": 15,
+        "SGP": 2,
+        "CU": 5,
+        "PVV": 24,
+        "PvdD": 2
+      }
+    },
+    {
+      "jaar": 2012,
+      "datum": "2012-09-12",
+      "opkomst": 74.6,
+      "zetels": {
+        "VVD": 41,
+        "PvdA": 38,
+        "CDA": 13,
+        "D66": 12,
+        "GL": 4,
+        "SP": 15,
+        "SGP": 3,
+        "CU": 5,
+        "PVV": 15,
+        "PvdD": 2,
+        "50+": 2
+      }
+    },
+    {
+      "jaar": 2017,
+      "datum": "2017-03-15",
+      "opkomst": 81.9,
+      "zetels": {
+        "VVD": 33,
+        "PvdA": 9,
+        "CDA": 19,
+        "D66": 19,
+        "GL": 14,
+        "SP": 14,
+        "SGP": 3,
+        "CU": 5,
+        "PVV": 20,
+        "PvdD": 5,
+        "FvD": 2,
+        "DENK": 3,
+        "50+": 4
+      }
+    },
+    {
+      "jaar": 2021,
+      "datum": "2021-03-17",
+      "opkomst": 78.7,
+      "zetels": {
+        "VVD": 34,
+        "PvdA": 9,
+        "CDA": 15,
+        "D66": 24,
+        "GL": 8,
+        "SP": 9,
+        "SGP": 3,
+        "CU": 5,
+        "PVV": 17,
+        "PvdD": 6,
+        "FvD": 8,
+        "DENK": 3,
+        "50+": 1,
+        "Volt": 3,
+        "JA21": 3,
+        "BBB": 1,
+        "Bij1": 1
+      }
+    },
+    {
+      "jaar": 2023,
+      "datum": "2023-11-22",
+      "opkomst": 77.7,
+      "zetels": {
+        "VVD": 24,
+        "PvdA": 8,
+        "CDA": 5,
+        "D66": 9,
+        "GL": 16,
+        "SP": 5,
+        "SGP": 3,
+        "CU": 3,
+        "PVV": 37,
+        "PvdD": 3,
+        "FvD": 3,
+        "DENK": 3,
+        "50+": 1,
+        "Volt": 2,
+        "JA21": 3,
+        "BBB": 7,
+        "NSC": 20,
+        "Bij1": 1
+      }
+    }
+  ],
+  "kabinetten": [
+    {
+      "id": "kok2",
+      "naam": "Kabinet-Kok II",
+      "premier": "Wim Kok",
+      "partijPremier": "PvdA",
+      "start": "1998-08-03",
+      "eind": "2002-07-22",
+      "coalitie": [
+        "PvdA",
+        "VVD",
+        "D66"
+      ],
+      "zetels": 97,
+      "gevallen": false,
+      "valReden": null,
+      "beschrijving": "Het tweede paarse kabinet bestond opnieuw uit PvdA, VVD en D66. De periode werd gekenmerkt door economische hoogconjunctuur en de introductie van de euro. Het kabinet viel door de uitslag van de verkiezingen waarbij Fortuyn de politiek opschudde.",
+      "hoogtepunten": [
+        "Introductie euro (2002)",
+        "Privatisering overheidsbedrijven",
+        "Economische groei en begrotingsoverschotten",
+        "Operatie Srebrenica-rapport (NIOD)"
+      ]
+    },
+    {
+      "id": "balk1",
+      "naam": "Kabinet-Balkenende I",
+      "premier": "Jan Peter Balkenende",
+      "partijPremier": "CDA",
+      "start": "2002-07-22",
+      "eind": "2003-05-27",
+      "coalitie": [
+        "CDA",
+        "LPF",
+        "VVD"
+      ],
+      "zetels": 93,
+      "gevallen": true,
+      "valReden": "LPF viel uiteen door interne ruzies na de moord op Pim Fortuyn",
+      "beschrijving": "Na de verkiezingswinst van de LPF werd een coalitie gevormd met CDA en VVD. De LPF implodeerde echter door interne conflicten, waarna het kabinet viel na slechts 87 dagen — het kortste kabinet in de naoorlogse geschiedenis.",
+      "hoogtepunten": [
+        "Kortste kabinet naoorlogse geschiedenis (87 dagen)",
+        "LPF-chaos door interne conflicten",
+        "Rouwperiode na moord Fortuyn",
+        "Nieuwe verkiezingen in januari 2003"
+      ]
+    },
+    {
+      "id": "balk2",
+      "naam": "Kabinet-Balkenende II",
+      "premier": "Jan Peter Balkenende",
+      "partijPremier": "CDA",
+      "start": "2003-05-27",
+      "eind": "2006-07-07",
+      "coalitie": [
+        "CDA",
+        "VVD",
+        "D66"
+      ],
+      "zetels": 78,
+      "gevallen": true,
+      "valReden": "D66 trok steun in na conflict over minister Verdonk en de Ayaan Hirsi Ali-affaire",
+      "beschrijving": "Het tweede kabinet-Balkenende voerde een strak bezuinigingsbeleid. De val werd veroorzaakt door het conflict rond minister Rita Verdonk en de nationaliteitsaffaire rondom Ayaan Hirsi Ali.",
+      "hoogtepunten": [
+        "Invoeringvan de zorgverzekeringswet (2006)",
+        "Streng asielbeleid onder Verdonk",
+        "Hirsi Ali-affaire",
+        "Bezuinigingen op sociale zekerheid"
+      ]
+    },
+    {
+      "id": "balk3",
+      "naam": "Kabinet-Balkenende III",
+      "premier": "Jan Peter Balkenende",
+      "partijPremier": "CDA",
+      "start": "2006-07-07",
+      "eind": "2007-02-22",
+      "coalitie": [
+        "CDA",
+        "VVD"
+      ],
+      "zetels": 63,
+      "gevallen": false,
+      "valReden": null,
+      "beschrijving": "Demissionair kabinet dat de boel draaiende hield na de val van Balkenende II. Het had geen Kamermeerderheid en deed weinig nieuws.",
+      "hoogtepunten": [
+        "Demissionair karakter",
+        "Brug naar nieuwe verkiezingen november 2006",
+        "Beperkte beleidsruimte"
+      ]
+    },
+    {
+      "id": "balk4",
+      "naam": "Kabinet-Balkenende IV",
+      "premier": "Jan Peter Balkenende",
+      "partijPremier": "CDA",
+      "start": "2007-02-22",
+      "eind": "2010-10-14",
+      "coalitie": [
+        "CDA",
+        "PvdA",
+        "CU"
+      ],
+      "zetels": 80,
+      "gevallen": true,
+      "valReden": "PvdA stapte op na conflict over verlenging missie in Uruzgan (Afghanistan)",
+      "beschrijving": "Een bijzondere coalitie van christendemocraten, sociaaldemocraten en christelijk-sociaalliberalen. De financiële crisis van 2008 domineerde de tweede helft van het kabinet. De PvdA wilde de Uruzgan-missie niet verlengen, wat tot de val leidde.",
+      "hoogtepunten": [
+        "Financiële crisis 2008 — reddingsoperatie banken",
+        "Nationalisering ABN AMRO/Fortis",
+        "Uruzgan-missie Afghanistan",
+        "Coalitie CDA-PvdA-CU"
+      ]
+    },
+    {
+      "id": "rutte1",
+      "naam": "Kabinet-Rutte I",
+      "premier": "Mark Rutte",
+      "partijPremier": "VVD",
+      "start": "2010-10-14",
+      "eind": "2012-11-05",
+      "coalitie": [
+        "VVD",
+        "CDA"
+      ],
+      "zetels": 52,
+      "gedoogd": "PVV",
+      "gevallen": true,
+      "valReden": "PVV trok gedoogsteun in tijdens Catshuis-onderhandelingen over bezuinigingen",
+      "beschrijving": "Een minderheidskabinet van VVD en CDA, gedoogd door de PVV. Het kabinet voerde een streng bezuinigingsbeleid. De val kwam toen Geert Wilders de onderhandelingen in het Catshuis verliet.",
+      "hoogtepunten": [
+        "Minderheidskabinet met PVV-gedoogsteun",
+        "Bezuinigingen €18 miljard",
+        "Catshuiscrisis",
+        "Eerste kabinet-Rutte"
+      ]
+    },
+    {
+      "id": "rutte2",
+      "naam": "Kabinet-Rutte II",
+      "premier": "Mark Rutte",
+      "partijPremier": "VVD",
+      "start": "2012-11-05",
+      "eind": "2017-03-15",
+      "coalitie": [
+        "VVD",
+        "PvdA"
+      ],
+      "zetels": 79,
+      "gevallen": false,
+      "valReden": null,
+      "beschrijving": "De paarse coalitie 2.0: VVD en PvdA vormden een stabiel maar politiek awkward kabinet. Beide partijen leden flinke verliezen bij de volgende verkiezingen vanwege de compromissen.",
+      "hoogtepunten": [
+        "MH17-ramp (2014)",
+        "Woningmarkthervorming",
+        "Afschaffing studiebeurs",
+        "Vluchtelingencrisis 2015–2016",
+        "Oekraïne-referendum (2016)"
+      ]
+    },
+    {
+      "id": "rutte3",
+      "naam": "Kabinet-Rutte III",
+      "premier": "Mark Rutte",
+      "partijPremier": "VVD",
+      "start": "2017-10-26",
+      "eind": "2021-01-15",
+      "coalitie": [
+        "VVD",
+        "CDA",
+        "D66",
+        "CU"
+      ],
+      "zetels": 76,
+      "gevallen": true,
+      "valReden": "Toeslagenaffaire — duizenden ouders ten onrechte als fraudeurs bestempeld",
+      "beschrijving": "Na 225 dagen formeren (toen record) begon het kabinet aan een roerige periode met de stikstofcrisis, toeslagenaffaire en coronapandemie. De val kwam door de conclusies van de Parlementaire Ondervragingscommissie Kinderopvangtoeslag.",
+      "hoogtepunten": [
+        "Langste formatie ooit (225 dagen, later gebroken)",
+        "Coronapandemie 2020",
+        "Toeslagenaffaire",
+        "Stikstofcrisis",
+        "Groninger aardbevingsproblematiek"
+      ]
+    },
+    {
+      "id": "rutte4",
+      "naam": "Kabinet-Rutte IV",
+      "premier": "Mark Rutte",
+      "partijPremier": "VVD",
+      "start": "2022-01-10",
+      "eind": "2024-07-02",
+      "coalitie": [
+        "VVD",
+        "D66",
+        "CDA",
+        "CU"
+      ],
+      "zetels": 78,
+      "gevallen": true,
+      "valReden": "Kabinet viel over migratiebeleid; Rutte verliet daarna de politiek voor de NAVO-top",
+      "beschrijving": "Het vierde kabinet-Rutte erfde een land in crisis: stikstof, wonen, inflatie. Het viel over het asielbeleid na onoverbrugbare meningsverschillen over gezinshereniging voor asielzoekers.",
+      "hoogtepunten": [
+        "Energiecrisis na Oekraïne-oorlog",
+        "Stijgende inflatie",
+        "Woningnood",
+        "Val over migratie",
+        "Rutte naar NAVO als secretaris-generaal"
+      ]
+    },
+    {
+      "id": "schoof",
+      "naam": "Kabinet-Schoof",
+      "premier": "Dick Schoof",
+      "partijPremier": "Onafhankelijk (PVV-coalitie)",
+      "start": "2024-07-02",
+      "eind": "2025-06-01",
+      "coalitie": [
+        "PVV",
+        "VVD",
+        "NSC",
+        "BBB"
+      ],
+      "zetels": 88,
+      "gevallen": true,
+      "valReden": "Coalitieonenigheid over bezuinigingen en migratiebeleid",
+      "beschrijving": "Na PVVs verkiezingswinst van 2023 werd Dick Schoof, voormalig AIVD-directeur, premier van een kabinet met PVV, VVD, NSC en BBB. Het strengste migratiebeleid ooit werd ingezet, maar de coalitie bleef kwetsbaar.",
+      "hoogtepunten": [
+        "PVV voor het eerst in kabinet",
+        "Strengste asielwet ooit",
+        "Dick Schoof als onafhankelijk premier",
+        "Spanningen in coalitie"
+      ]
+    }
+  ],
+  "beloftes": [
+    {
+      "partij": "VVD",
+      "jaar": 2021,
+      "omschrijving": "Inkomstenbelasting verlagen voor middeninkomens",
+      "categorie": "Belasting",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2021,
+      "omschrijving": "AOW-leeftijd koppelen aan levensverwachting",
+      "categorie": "Pensioenen",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2021,
+      "omschrijving": "Asielinstroom beperken tot maximaal 15.000 per jaar",
+      "categorie": "Migratie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2021,
+      "omschrijving": "Extra investeren in veiligheid en politie",
+      "categorie": "Veiligheid",
+      "status": "deels"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2017,
+      "omschrijving": "Defensiebudget verhogen richting 2% NAVO-norm",
+      "categorie": "Defensie",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2017,
+      "omschrijving": "Arbeidsmarkt flexibiliseren",
+      "categorie": "Werk",
+      "status": "deels"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2023,
+      "omschrijving": "Asielcrisis oplossen: jaarlijkse instroom halveren",
+      "categorie": "Migratie",
+      "status": "deels"
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2023,
+      "omschrijving": "Belastingdruk verlichten voor werkenden",
+      "categorie": "Belasting",
+      "status": "deels"
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "omschrijving": "Minimumloon verhogen naar €14 per uur",
+      "categorie": "Werk",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "omschrijving": "Vermogensbelasting verhogen voor rijksten",
+      "categorie": "Belasting",
+      "status": "gebroken"
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "omschrijving": "Gratis kinderopvang voor alle werkende ouders",
+      "categorie": "Gezin",
+      "status": "deels"
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "omschrijving": "Klimaatneutraal Nederland in 2050",
+      "categorie": "Klimaat",
+      "status": "deels"
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "omschrijving": "Woonrecht opnemen in de Grondwet",
+      "categorie": "Wonen",
+      "status": "gebroken"
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2017,
+      "omschrijving": "Eigen risico in de zorg afschaffen",
+      "categorie": "Zorg",
+      "status": "gebroken"
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2021,
+      "omschrijving": "Kinderopvang bijna gratis voor werkende ouders",
+      "categorie": "Gezin",
+      "status": "deels"
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2021,
+      "omschrijving": "Gezinshereniging beperken",
+      "categorie": "Migratie",
+      "status": "deels"
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2021,
+      "omschrijving": "Middeninkomen ontzien bij bezuinigingen",
+      "categorie": "Belasting",
+      "status": "deels"
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2021,
+      "omschrijving": "Investeringen in kennis en innovatie verdubbelen",
+      "categorie": "Economie",
+      "status": "deels"
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2017,
+      "omschrijving": "Verlaging belasting op arbeid",
+      "categorie": "Belasting",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "omschrijving": "€1 miljard extra investeren in onderwijs per jaar",
+      "categorie": "Onderwijs",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "omschrijving": "Euthanasie verruimen (Voltooid Leven)",
+      "categorie": "Zorg",
+      "status": "gebroken"
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "omschrijving": "Referenda herinvoeren",
+      "categorie": "Democratie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "omschrijving": "Europa versterken en verdiepen",
+      "categorie": "Europa",
+      "status": "deels"
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "omschrijving": "Gereguleerde verkoop cannabis legaliseren",
+      "categorie": "Justitie",
+      "status": "deels"
+    },
+    {
+      "partij": "D66",
+      "jaar": 2017,
+      "omschrijving": "Grondwettelijk Hof oprichten",
+      "categorie": "Democratie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "GL",
+      "jaar": 2021,
+      "omschrijving": "CO2-heffing verhogen voor industrie",
+      "categorie": "Klimaat",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "GL",
+      "jaar": 2021,
+      "omschrijving": "100% duurzame energie in 2030",
+      "categorie": "Klimaat",
+      "status": "deels"
+    },
+    {
+      "partij": "GL",
+      "jaar": 2021,
+      "omschrijving": "Vermogensongelijkheid aanpakken via belasting",
+      "categorie": "Economie",
+      "status": "deels"
+    },
+    {
+      "partij": "GL",
+      "jaar": 2021,
+      "omschrijving": "Open en humaan asielbeleid",
+      "categorie": "Migratie",
+      "status": "deels"
+    },
+    {
+      "partij": "SP",
+      "jaar": 2021,
+      "omschrijving": "Eigen risico in de zorg volledig afschaffen",
+      "categorie": "Zorg",
+      "status": "gebroken"
+    },
+    {
+      "partij": "SP",
+      "jaar": 2021,
+      "omschrijving": "Huurbevriezing in vrije sector",
+      "categorie": "Wonen",
+      "status": "deels"
+    },
+    {
+      "partij": "SP",
+      "jaar": 2021,
+      "omschrijving": "Nationaliseren van energiebedrijven",
+      "categorie": "Economie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "SP",
+      "jaar": 2021,
+      "omschrijving": "AOW-leeftijd terug naar 65 jaar",
+      "categorie": "Pensioenen",
+      "status": "gebroken"
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2023,
+      "omschrijving": "Grenzen sluiten voor asielzoekers",
+      "categorie": "Migratie",
+      "status": "deels"
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2023,
+      "omschrijving": "Strengste asielwet ooit invoeren",
+      "categorie": "Migratie",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2023,
+      "omschrijving": "Belasting verlagen voor iedereen",
+      "categorie": "Belasting",
+      "status": "deels"
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2021,
+      "omschrijving": "Islam-scholen sluiten",
+      "categorie": "Onderwijs",
+      "status": "gebroken"
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2021,
+      "omschrijving": "Referenda invoeren voor grote beslissingen",
+      "categorie": "Democratie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "NSC",
+      "jaar": 2023,
+      "omschrijving": "Grondwettelijk Hof instellen",
+      "categorie": "Democratie",
+      "status": "deels"
+    },
+    {
+      "partij": "NSC",
+      "jaar": 2023,
+      "omschrijving": "Migratiebeleid aanscherpen",
+      "categorie": "Migratie",
+      "status": "deels"
+    },
+    {
+      "partij": "NSC",
+      "jaar": 2023,
+      "omschrijving": "Toeslagenaffaire volledig compenseren",
+      "categorie": "Bestuur",
+      "status": "deels"
+    },
+    {
+      "partij": "NSC",
+      "jaar": 2023,
+      "omschrijving": "Betrouwbaar en transparant bestuur herstellen",
+      "categorie": "Bestuur",
+      "status": "deels"
+    },
+    {
+      "partij": "BBB",
+      "jaar": 2023,
+      "omschrijving": "Stikstofbeleid fundamenteel herzien",
+      "categorie": "Landbouw",
+      "status": "deels"
+    },
+    {
+      "partij": "BBB",
+      "jaar": 2023,
+      "omschrijving": "Boeren beschermen tegen gedwongen uitkoop",
+      "categorie": "Landbouw",
+      "status": "deels"
+    },
+    {
+      "partij": "BBB",
+      "jaar": 2023,
+      "omschrijving": "Provinciale autonomie versterken",
+      "categorie": "Bestuur",
+      "status": "deels"
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2021,
+      "omschrijving": "Nexit: uittreden uit de Europese Unie",
+      "categorie": "Europa",
+      "status": "gebroken"
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2021,
+      "omschrijving": "Bindende referenda invoeren",
+      "categorie": "Democratie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2021,
+      "omschrijving": "Immigratie drastisch verminderen",
+      "categorie": "Migratie",
+      "status": "gebroken"
+    },
+    {
+      "partij": "CU",
+      "jaar": 2021,
+      "omschrijving": "Abortus wet aanpassen (bedenktijd afschaffen)",
+      "categorie": "Ethiek",
+      "status": "gebroken"
+    },
+    {
+      "partij": "CU",
+      "jaar": 2021,
+      "omschrijving": "Extra investeren in armoedebestrijding",
+      "categorie": "Sociaal",
+      "status": "nagekomen"
+    },
+    {
+      "partij": "CU",
+      "jaar": 2021,
+      "omschrijving": "Duurzaamheid koppelen aan landbouwbeleid",
+      "categorie": "Landbouw",
+      "status": "deels"
+    }
+  ],
+  "wetten": [
+    {
+      "id": 1,
+      "naam": "Klimaatwet",
+      "jaar": 2019,
+      "omschrijving": "Wettelijk klimaatdoelen vastgelegd: 49% CO₂-reductie in 2030 t.o.v. 1990"
+    },
+    {
+      "id": 2,
+      "naam": "Wet werk en zekerheid",
+      "jaar": 2015,
+      "omschrijving": "Hervorming arbeidsmarkt: meer bescherming flexwerkers, hervorming WW en ontslagrecht"
+    },
+    {
+      "id": 3,
+      "naam": "Pensioenwet 2023",
+      "jaar": 2023,
+      "omschrijving": "Overgang naar nieuw pensioenstelsel met persoonlijk pensioenvermogen per werknemer"
+    },
+    {
+      "id": 4,
+      "naam": "Afschaffing referendum",
+      "jaar": 2018,
+      "omschrijving": "Intrekking van de Wet raadgevend referendum na het Oekraïne-referendum van 2016"
+    },
+    {
+      "id": 5,
+      "naam": "Dividendbelasting",
+      "jaar": 2018,
+      "omschrijving": "Kabinetsvoorstel tot afschaffing dividendbelasting (Unilever-deal) — later ingetrokken"
+    },
+    {
+      "id": 6,
+      "naam": "Corona steunpakket (NOW)",
+      "jaar": 2020,
+      "omschrijving": "Noodmaatregel Overbrugging Werkgelegenheid: loonsteun voor bedrijven tijdens coronacrisis"
+    },
+    {
+      "id": 7,
+      "naam": "Stikstofwet",
+      "jaar": 2022,
+      "omschrijving": "Wet stikstofreductie en natuurverbetering: halvering stikstofuitstoot in 2030"
+    },
+    {
+      "id": 8,
+      "naam": "Stopzetting gaswinning Gron.",
+      "jaar": 2023,
+      "omschrijving": "Besluit tot volledige stopzetting gaswinning in Groningen per 2024"
+    },
+    {
+      "id": 9,
+      "naam": "Wet inburgering 2022",
+      "jaar": 2022,
+      "omschrijving": "Nieuwe inburgeringsverplichting: gemeenten verantwoordelijk voor inburgering nieuwkomers"
+    },
+    {
+      "id": 10,
+      "naam": "Toeslagenwet compensatie",
+      "jaar": 2021,
+      "omschrijving": "Wet hersteloperatie toeslagen: compensatie voor gedupeerde ouders kinderopvangtoeslag"
+    },
+    {
+      "id": 11,
+      "naam": "Minimumuurloon",
+      "jaar": 2023,
+      "omschrijving": "Invoering wettelijk minimumuurloon i.p.v. minimumdagloon — verhoging met 10%"
+    },
+    {
+      "id": 12,
+      "naam": "Asielwet 2024",
+      "jaar": 2024,
+      "omschrijving": "Aanscherping asielbeleid: snellere procedures, strengere eisen, beperking gezinshereniging"
+    }
+  ],
+  "stemgedrag": [
+    {
+      "partij": "VVD",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 1,
+      "stem": "tegen"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 1,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 1,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 1,
+      "stem": "voor"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 2,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 2,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 2,
+      "stem": "tegen"
+    },
+    {
+      "partij": "D66",
+      "wetId": 2,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 2,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 2,
+      "stem": "tegen"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 2,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 2,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 2,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 2,
+      "stem": "voor"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 3,
+      "stem": "tegen"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 3,
+      "stem": "tegen"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 3,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 3,
+      "stem": "tegen"
+    },
+    {
+      "partij": "BBB",
+      "wetId": 3,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "NSC",
+      "wetId": 3,
+      "stem": "voor"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 4,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 4,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 4,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 4,
+      "stem": "tegen"
+    },
+    {
+      "partij": "GL",
+      "wetId": 4,
+      "stem": "tegen"
+    },
+    {
+      "partij": "SP",
+      "wetId": 4,
+      "stem": "tegen"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 4,
+      "stem": "voor"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 4,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 4,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 4,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 4,
+      "stem": "tegen"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 6,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 6,
+      "stem": "voor"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 7,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 7,
+      "stem": "tegen"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 7,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 7,
+      "stem": "tegen"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 7,
+      "stem": "voor"
+    },
+    {
+      "partij": "BBB",
+      "wetId": 7,
+      "stem": "tegen"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 8,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CU",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 8,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "BBB",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "NSC",
+      "wetId": 8,
+      "stem": "voor"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "D66",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "GL",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "SP",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "CU",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "BBB",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "NSC",
+      "wetId": 11,
+      "stem": "voor"
+    },
+    {
+      "partij": "VVD",
+      "wetId": 12,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdA",
+      "wetId": 12,
+      "stem": "tegen"
+    },
+    {
+      "partij": "CDA",
+      "wetId": 12,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "D66",
+      "wetId": 12,
+      "stem": "tegen"
+    },
+    {
+      "partij": "GL",
+      "wetId": 12,
+      "stem": "tegen"
+    },
+    {
+      "partij": "SP",
+      "wetId": 12,
+      "stem": "tegen"
+    },
+    {
+      "partij": "PVV",
+      "wetId": 12,
+      "stem": "voor"
+    },
+    {
+      "partij": "FvD",
+      "wetId": 12,
+      "stem": "voor"
+    },
+    {
+      "partij": "CU",
+      "wetId": 12,
+      "stem": "onthouden"
+    },
+    {
+      "partij": "SGP",
+      "wetId": 12,
+      "stem": "voor"
+    },
+    {
+      "partij": "PvdD",
+      "wetId": 12,
+      "stem": "tegen"
+    },
+    {
+      "partij": "BBB",
+      "wetId": 12,
+      "stem": "voor"
+    },
+    {
+      "partij": "NSC",
+      "wetId": 12,
+      "stem": "voor"
+    },
+    {
+      "partij": "JA21",
+      "wetId": 12,
+      "stem": "voor"
+    }
+  ],
+  "financien": [
+    {
+      "partij": "VVD",
+      "jaar": 2018,
+      "subsidie": 4150000,
+      "donaties": 1820000,
+      "contributies": 3180000
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2019,
+      "subsidie": 4280000,
+      "donaties": 1760000,
+      "contributies": 3220000
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2020,
+      "subsidie": 4390000,
+      "donaties": 1640000,
+      "contributies": 3310000
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2021,
+      "subsidie": 4510000,
+      "donaties": 1980000,
+      "contributies": 3190000
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2022,
+      "subsidie": 4420000,
+      "donaties": 2110000,
+      "contributies": 3280000
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2023,
+      "subsidie": 4350000,
+      "donaties": 1870000,
+      "contributies": 3350000
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2018,
+      "subsidie": 2850000,
+      "donaties": 880000,
+      "contributies": 2090000
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2019,
+      "subsidie": 2920000,
+      "donaties": 910000,
+      "contributies": 2130000
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2020,
+      "subsidie": 2980000,
+      "donaties": 870000,
+      "contributies": 2070000
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "subsidie": 3050000,
+      "donaties": 960000,
+      "contributies": 2150000
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2022,
+      "subsidie": 2990000,
+      "donaties": 1020000,
+      "contributies": 2200000
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2023,
+      "subsidie": 2870000,
+      "donaties": 890000,
+      "contributies": 2180000
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2018,
+      "subsidie": 3080000,
+      "donaties": 1090000,
+      "contributies": 2280000
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2019,
+      "subsidie": 3150000,
+      "donaties": 1120000,
+      "contributies": 2310000
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2020,
+      "subsidie": 3210000,
+      "donaties": 1050000,
+      "contributies": 2250000
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2021,
+      "subsidie": 3290000,
+      "donaties": 1180000,
+      "contributies": 2340000
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2022,
+      "subsidie": 3120000,
+      "donaties": 1070000,
+      "contributies": 2190000
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2023,
+      "subsidie": 2880000,
+      "donaties": 980000,
+      "contributies": 2050000
+    },
+    {
+      "partij": "D66",
+      "jaar": 2018,
+      "subsidie": 2580000,
+      "donaties": 790000,
+      "contributies": 1880000
+    },
+    {
+      "partij": "D66",
+      "jaar": 2019,
+      "subsidie": 2650000,
+      "donaties": 820000,
+      "contributies": 1920000
+    },
+    {
+      "partij": "D66",
+      "jaar": 2020,
+      "subsidie": 2720000,
+      "donaties": 860000,
+      "contributies": 1960000
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "subsidie": 2890000,
+      "donaties": 910000,
+      "contributies": 2050000
+    },
+    {
+      "partij": "D66",
+      "jaar": 2022,
+      "subsidie": 2780000,
+      "donaties": 870000,
+      "contributies": 1990000
+    },
+    {
+      "partij": "D66",
+      "jaar": 2023,
+      "subsidie": 2610000,
+      "donaties": 800000,
+      "contributies": 1870000
+    },
+    {
+      "partij": "GL",
+      "jaar": 2018,
+      "subsidie": 1780000,
+      "donaties": 590000,
+      "contributies": 1380000
+    },
+    {
+      "partij": "GL",
+      "jaar": 2019,
+      "subsidie": 1840000,
+      "donaties": 620000,
+      "contributies": 1420000
+    },
+    {
+      "partij": "GL",
+      "jaar": 2020,
+      "subsidie": 1890000,
+      "donaties": 650000,
+      "contributies": 1460000
+    },
+    {
+      "partij": "GL",
+      "jaar": 2021,
+      "subsidie": 1960000,
+      "donaties": 680000,
+      "contributies": 1490000
+    },
+    {
+      "partij": "GL",
+      "jaar": 2022,
+      "subsidie": 2050000,
+      "donaties": 720000,
+      "contributies": 1540000
+    },
+    {
+      "partij": "GL",
+      "jaar": 2023,
+      "subsidie": 2180000,
+      "donaties": 780000,
+      "contributies": 1620000
+    },
+    {
+      "partij": "SP",
+      "jaar": 2018,
+      "subsidie": 1920000,
+      "donaties": 710000,
+      "contributies": 1590000
+    },
+    {
+      "partij": "SP",
+      "jaar": 2019,
+      "subsidie": 1870000,
+      "donaties": 680000,
+      "contributies": 1560000
+    },
+    {
+      "partij": "SP",
+      "jaar": 2020,
+      "subsidie": 1810000,
+      "donaties": 660000,
+      "contributies": 1530000
+    },
+    {
+      "partij": "SP",
+      "jaar": 2021,
+      "subsidie": 1780000,
+      "donaties": 690000,
+      "contributies": 1570000
+    },
+    {
+      "partij": "SP",
+      "jaar": 2022,
+      "subsidie": 1720000,
+      "donaties": 640000,
+      "contributies": 1510000
+    },
+    {
+      "partij": "SP",
+      "jaar": 2023,
+      "subsidie": 1650000,
+      "donaties": 610000,
+      "contributies": 1480000
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2018,
+      "subsidie": 2180000,
+      "donaties": 1480000,
+      "contributies": 820000
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2019,
+      "subsidie": 2240000,
+      "donaties": 1520000,
+      "contributies": 840000
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2020,
+      "subsidie": 2290000,
+      "donaties": 1590000,
+      "contributies": 860000
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2021,
+      "subsidie": 2350000,
+      "donaties": 1630000,
+      "contributies": 880000
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2022,
+      "subsidie": 2410000,
+      "donaties": 1680000,
+      "contributies": 900000
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2023,
+      "subsidie": 2980000,
+      "donaties": 2150000,
+      "contributies": 920000
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2018,
+      "subsidie": 420000,
+      "donaties": 1890000,
+      "contributies": 280000
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2019,
+      "subsidie": 980000,
+      "donaties": 2340000,
+      "contributies": 420000
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2020,
+      "subsidie": 1240000,
+      "donaties": 1980000,
+      "contributies": 380000
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2021,
+      "subsidie": 1380000,
+      "donaties": 1820000,
+      "contributies": 350000
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2022,
+      "subsidie": 980000,
+      "donaties": 1560000,
+      "contributies": 290000
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2023,
+      "subsidie": 780000,
+      "donaties": 1280000,
+      "contributies": 240000
+    },
+    {
+      "partij": "CU",
+      "jaar": 2018,
+      "subsidie": 1180000,
+      "donaties": 490000,
+      "contributies": 1080000
+    },
+    {
+      "partij": "CU",
+      "jaar": 2019,
+      "subsidie": 1220000,
+      "donaties": 510000,
+      "contributies": 1100000
+    },
+    {
+      "partij": "CU",
+      "jaar": 2020,
+      "subsidie": 1260000,
+      "donaties": 530000,
+      "contributies": 1130000
+    },
+    {
+      "partij": "CU",
+      "jaar": 2021,
+      "subsidie": 1310000,
+      "donaties": 560000,
+      "contributies": 1150000
+    },
+    {
+      "partij": "CU",
+      "jaar": 2022,
+      "subsidie": 1270000,
+      "donaties": 540000,
+      "contributies": 1120000
+    },
+    {
+      "partij": "CU",
+      "jaar": 2023,
+      "subsidie": 1190000,
+      "donaties": 500000,
+      "contributies": 1090000
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2018,
+      "subsidie": 890000,
+      "donaties": 290000,
+      "contributies": 780000
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2019,
+      "subsidie": 910000,
+      "donaties": 310000,
+      "contributies": 800000
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2020,
+      "subsidie": 930000,
+      "donaties": 300000,
+      "contributies": 810000
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2021,
+      "subsidie": 950000,
+      "donaties": 320000,
+      "contributies": 820000
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2022,
+      "subsidie": 940000,
+      "donaties": 310000,
+      "contributies": 815000
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2023,
+      "subsidie": 960000,
+      "donaties": 330000,
+      "contributies": 830000
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2018,
+      "subsidie": 690000,
+      "donaties": 390000,
+      "contributies": 870000
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2019,
+      "subsidie": 720000,
+      "donaties": 410000,
+      "contributies": 890000
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2020,
+      "subsidie": 750000,
+      "donaties": 430000,
+      "contributies": 910000
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2021,
+      "subsidie": 790000,
+      "donaties": 460000,
+      "contributies": 940000
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2022,
+      "subsidie": 780000,
+      "donaties": 450000,
+      "contributies": 930000
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2023,
+      "subsidie": 770000,
+      "donaties": 440000,
+      "contributies": 920000
+    }
+  ],
+  "aanwezigheid": [
+    {
+      "partij": "VVD",
+      "jaar": 2018,
+      "percentage": 87
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2019,
+      "percentage": 85
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2020,
+      "percentage": 88
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2021,
+      "percentage": 86
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2022,
+      "percentage": 84
+    },
+    {
+      "partij": "VVD",
+      "jaar": 2023,
+      "percentage": 83
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2018,
+      "percentage": 84
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2019,
+      "percentage": 86
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2020,
+      "percentage": 83
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2021,
+      "percentage": 85
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2022,
+      "percentage": 87
+    },
+    {
+      "partij": "PvdA",
+      "jaar": 2023,
+      "percentage": 86
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2018,
+      "percentage": 82
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2019,
+      "percentage": 81
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2020,
+      "percentage": 84
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2021,
+      "percentage": 83
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2022,
+      "percentage": 80
+    },
+    {
+      "partij": "CDA",
+      "jaar": 2023,
+      "percentage": 79
+    },
+    {
+      "partij": "D66",
+      "jaar": 2018,
+      "percentage": 89
+    },
+    {
+      "partij": "D66",
+      "jaar": 2019,
+      "percentage": 88
+    },
+    {
+      "partij": "D66",
+      "jaar": 2020,
+      "percentage": 91
+    },
+    {
+      "partij": "D66",
+      "jaar": 2021,
+      "percentage": 90
+    },
+    {
+      "partij": "D66",
+      "jaar": 2022,
+      "percentage": 88
+    },
+    {
+      "partij": "D66",
+      "jaar": 2023,
+      "percentage": 87
+    },
+    {
+      "partij": "GL",
+      "jaar": 2018,
+      "percentage": 86
+    },
+    {
+      "partij": "GL",
+      "jaar": 2019,
+      "percentage": 87
+    },
+    {
+      "partij": "GL",
+      "jaar": 2020,
+      "percentage": 89
+    },
+    {
+      "partij": "GL",
+      "jaar": 2021,
+      "percentage": 88
+    },
+    {
+      "partij": "GL",
+      "jaar": 2022,
+      "percentage": 90
+    },
+    {
+      "partij": "GL",
+      "jaar": 2023,
+      "percentage": 89
+    },
+    {
+      "partij": "SP",
+      "jaar": 2018,
+      "percentage": 83
+    },
+    {
+      "partij": "SP",
+      "jaar": 2019,
+      "percentage": 82
+    },
+    {
+      "partij": "SP",
+      "jaar": 2020,
+      "percentage": 80
+    },
+    {
+      "partij": "SP",
+      "jaar": 2021,
+      "percentage": 81
+    },
+    {
+      "partij": "SP",
+      "jaar": 2022,
+      "percentage": 79
+    },
+    {
+      "partij": "SP",
+      "jaar": 2023,
+      "percentage": 78
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2018,
+      "percentage": 62
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2019,
+      "percentage": 59
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2020,
+      "percentage": 63
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2021,
+      "percentage": 61
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2022,
+      "percentage": 64
+    },
+    {
+      "partij": "PVV",
+      "jaar": 2023,
+      "percentage": 68
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2018,
+      "percentage": 71
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2019,
+      "percentage": 68
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2020,
+      "percentage": 54
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2021,
+      "percentage": 52
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2022,
+      "percentage": 49
+    },
+    {
+      "partij": "FvD",
+      "jaar": 2023,
+      "percentage": 53
+    },
+    {
+      "partij": "CU",
+      "jaar": 2018,
+      "percentage": 90
+    },
+    {
+      "partij": "CU",
+      "jaar": 2019,
+      "percentage": 91
+    },
+    {
+      "partij": "CU",
+      "jaar": 2020,
+      "percentage": 89
+    },
+    {
+      "partij": "CU",
+      "jaar": 2021,
+      "percentage": 92
+    },
+    {
+      "partij": "CU",
+      "jaar": 2022,
+      "percentage": 90
+    },
+    {
+      "partij": "CU",
+      "jaar": 2023,
+      "percentage": 88
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2018,
+      "percentage": 93
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2019,
+      "percentage": 94
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2020,
+      "percentage": 92
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2021,
+      "percentage": 95
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2022,
+      "percentage": 93
+    },
+    {
+      "partij": "SGP",
+      "jaar": 2023,
+      "percentage": 94
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2018,
+      "percentage": 85
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2019,
+      "percentage": 84
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2020,
+      "percentage": 86
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2021,
+      "percentage": 87
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2022,
+      "percentage": 85
+    },
+    {
+      "partij": "PvdD",
+      "jaar": 2023,
+      "percentage": 84
+    },
+    {
+      "partij": "BBB",
+      "jaar": 2021,
+      "percentage": 76
+    },
+    {
+      "partij": "BBB",
+      "jaar": 2022,
+      "percentage": 79
+    },
+    {
+      "partij": "BBB",
+      "jaar": 2023,
+      "percentage": 81
+    },
+    {
+      "partij": "NSC",
+      "jaar": 2023,
+      "percentage": 83
+    },
+    {
+      "partij": "Volt",
+      "jaar": 2021,
+      "percentage": 82
+    },
+    {
+      "partij": "Volt",
+      "jaar": 2022,
+      "percentage": 84
+    },
+    {
+      "partij": "Volt",
+      "jaar": 2023,
+      "percentage": 83
+    }
+  ]
+}

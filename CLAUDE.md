@@ -47,8 +47,19 @@ blauwdruk. Bij vervolgwerk: stem met de gebruiker af of we de MVP doorontwikkele
 brief (i18n-laag, universeel multi-country schema, LLM-parsing, Tweede Kamer API-ingestie) of
 eerst de MVP afronden.
 
-## Gerelateerde repo
-`Kiwis92/PoliTrack` (gecloned in `/home/user/PoliTrack`, branch `master`) bevat een eerdere,
-**statische** website-variant (`index.html`/`style.css`/`script.js` + een map "Claude gegenereerd"
-met `data.js`, `app.js`, `build_database.py`, `politiek_nl.db`). Nog te beslissen of/hoe deze
-samengevoegd wordt met de FastAPI-app.
+## Consolidatie (besloten)
+**Deze repo (`My-own-database`) is de ene canonieke codebasis.** De repo `Kiwis92/PoliTrack`
+bevatte een eerdere statische website-variant; de waardevolle inhoud daarvan is overgenomen:
+
+- **`data/politiek_nl.json`** — volledige dataset geëxtraheerd uit `data.js` van die repo:
+  21 partijen (incl. historische), 9 verkiezingen (1998–2023), 10 kabinetten (Kok II → Schoof,
+  met valredenen en hoogtepunten), 51 partijbeloftes per verkiezingsjaar (status:
+  nagekomen/deels/gebroken), 12 wetten + 108 stemgedrag-records per fractie, partijfinanciën
+  en aanwezigheidspercentages.
+- De statische site zelf, `build_database.py` en de lege `politiek_nl.db` zijn **niet**
+  overgenomen (vervangen door de FastAPI-app; db was leeg; script wees naar dood pad).
+- De `PoliTrack`-repo geldt als archief; nieuw werk gebeurt hier.
+
+Let op datavocabulaire in de JSON: belofte-statussen zijn `nagekomen`/`deels`/`gebroken`
+(dus incl. "deels" — neem een status *Deels Waargemaakt* op in het datamodel), stemmen zijn
+`voor`/`tegen`/`onthouden`.
