@@ -1,21 +1,28 @@
 {% extends "base.html" %}
-{% block title %}Kabinetten{% endblock %}
+{% block title %}{{ _('cabinets.title') }}{% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="container">
-        <h1>Kabinetten</h1>
-        <p>Overzicht van alle geregistreerde kabinetsperiodes</p>
+        <h1>{{ _('cabinets.title') }}</h1>
+        <p>{{ _('cabinets.subtitle') }}</p>
     </div>
 </div>
 
 <div class="container page-body">
-    {% if cabinet_stats %}
     <div class="cabinets-grid">
         {% for item in cabinet_stats %}
         <a href="/kabinet/{{ item.cabinet.id }}" class="cabinet-detail-card">
-            <div class="cabinet-period">{{ item.cabinet.year_start }}{% if item.cabinet.year_end %} – {{ item.cabinet.year_end }}{% else %} – heden{% endif %}</div>
+            <div class="cabinet-card-top">
+                <div class="cabinet-period">{{ item.cabinet.year_start }} – {{ item.cabinet.year_end or _('common.until_now') }}</div>
+                {% if not item.cabinet.end_date %}
+                <span class="cab-badge cab-current">{{ _('cabinets.current') }}</span>
+                {% elif item.cabinet.fell %}
+                <span class="cab-badge cab-fell">{{ _('cabinets.fell') }}</span>
+                {% endif %}
+            </div>
             <h2 class="cabinet-name">{{ item.cabinet.name }}</h2>
+            {% if item.cabinet.premier %}<p class="cabinet-premier">{{ item.cabinet.premier }}</p>{% endif %}
 
             {% if item.cabinet.parties %}
             <div class="cabinet-parties">
@@ -25,8 +32,8 @@
             </div>
             {% endif %}
 
-            {% if item.cabinet.description %}
-            <p class="cabinet-desc">{{ item.cabinet.description[:200] }}{% if item.cabinet.description|length > 200 %}...{% endif %}</p>
+            {% if item.cabinet.fell and item.cabinet.fall_reason %}
+            <p class="cabinet-fall-reason">⚠ {{ item.cabinet.fall_reason[:140] }}{% if item.cabinet.fall_reason|length > 140 %}...{% endif %}</p>
             {% endif %}
 
             {% if item.total > 0 %}
@@ -35,23 +42,13 @@
                     <div class="progress-fill" style="width: {{ item.pct }}%"></div>
                 </div>
                 <div class="cabinet-progress-stats">
-                    <span>{{ item.fulfilled }} / {{ item.total }} beloftes waargemaakt</span>
+                    <span>{{ _('cabinets.fulfilled_of', fulfilled=item.fulfilled, total=item.total) }}</span>
                     <span class="pct-badge">{{ item.pct }}%</span>
                 </div>
             </div>
-            {% else %}
-            <p class="no-promises">Nog geen beloftes ingevoerd</p>
             {% endif %}
         </a>
         {% endfor %}
     </div>
-    {% else %}
-    <div class="empty-state">
-        <div class="empty-icon">🏛️</div>
-        <h2>Geen kabinetten gevonden</h2>
-        <p>Voeg een kabinet toe via het beheerspaneel.</p>
-        <a href="/admin/kabinetten/nieuw" class="btn btn-primary">Kabinet toevoegen</a>
-    </div>
-    {% endif %}
 </div>
 {% endblock %}

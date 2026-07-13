@@ -14,8 +14,24 @@
         <form method="post" action="/admin/beloftes/{{ promise.id }}/bewerk">
             <div class="form-row">
                 <div class="form-group">
-                    <label class="form-label">Kabinet *</label>
-                    <select name="cabinet_id" class="form-select" required>
+                    <label class="form-label">Soort belofte</label>
+                    <select name="source_kind" class="form-select">
+                        {% for s in sources %}
+                        <option value="{{ s.name }}" {% if s.name == promise.source_kind.name %}selected{% endif %}>{{ s.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Verkiezingsjaar</label>
+                    <input type="number" name="election_year" class="form-input" value="{{ promise.election_year or '' }}" min="1900" max="2100">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Kabinet</label>
+                    <select name="cabinet_id" class="form-select">
+                        <option value="">— Geen —</option>
                         {% for cab in cabinets %}
                         <option value="{{ cab.id }}" {% if cab.id == promise.cabinet_id %}selected{% endif %}>{{ cab.name }}</option>
                         {% endfor %}
@@ -24,9 +40,9 @@
                 <div class="form-group">
                     <label class="form-label">Partij</label>
                     <select name="party_id" class="form-select">
-                        <option value="">Heel kabinet / coalitie</option>
+                        <option value="">— Geen (hele coalitie) —</option>
                         {% for party in parties %}
-                        <option value="{{ party.id }}" {% if promise.party_id == party.id %}selected{% endif %}>{{ party.name }} ({{ party.abbreviation }})</option>
+                        <option value="{{ party.id }}" {% if promise.party_id == party.id %}selected{% endif %}>{{ party.abbreviation }} – {{ party.name }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -40,15 +56,14 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Categorie</label>
-                    <select name="category" class="form-select">
-                        {% for cat in categories %}
-                        <option value="{{ cat.name }}" {% if cat.name == promise.category.name %}selected{% endif %}>{{ cat.value }}</option>
-                        {% endfor %}
-                    </select>
+                    <input type="text" name="category" class="form-input" list="categoryList" value="{{ promise.category }}">
+                    <datalist id="categoryList">
+                        {% for cat in categories %}<option value="{{ cat }}">{% endfor %}
+                    </datalist>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Status</label>
-                    <select name="status" class="form-select status-select" id="statusSelect">
+                    <select name="status" class="form-select">
                         {% for s in statuses %}
                         <option value="{{ s.name }}" {% if s.name == promise.status.name %}selected{% endif %}>{{ s.value }}</option>
                         {% endfor %}
@@ -62,16 +77,16 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Originele tekst uit akkoord</label>
+                <label class="form-label">Originele tekst uit bron</label>
                 <textarea name="source_text" class="form-textarea" rows="3">{{ promise.source_text or '' }}</textarea>
             </div>
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Opslaan</button>
-                <form method="post" action="/admin/beloftes/{{ promise.id }}/verwijder" class="inline-form" onsubmit="return confirm('Weet je zeker dat je deze belofte wilt verwijderen?')">
-                    <button type="submit" class="btn btn-danger">Verwijder belofte</button>
-                </form>
             </div>
+        </form>
+        <form method="post" action="/admin/beloftes/{{ promise.id }}/verwijder" class="inline-form delete-form" onsubmit="return confirm('Weet je zeker dat je deze belofte wilt verwijderen?')">
+            <button type="submit" class="btn btn-danger">Verwijder belofte</button>
         </form>
     </div>
 
@@ -94,7 +109,7 @@
                 </div>
                 {% if ev.url %}<a href="{{ ev.url }}" target="_blank" class="evidence-url" rel="noopener">{{ ev.url[:60] }}{% if ev.url|length > 60 %}...{% endif %} ↗</a>{% endif %}
                 {% if ev.description %}<p class="evidence-desc-sm">{{ ev.description }}</p>{% endif %}
-                {% if ev.date_published %}<span class="evidence-date">{{ ev.date_published.strftime('%d %b %Y') }}</span>{% endif %}
+                {% if ev.date_published %}<span class="evidence-date">{{ ev.date_published.strftime('%d-%m-%Y') }}</span>{% endif %}
             </div>
             {% endfor %}
         </div>
@@ -107,7 +122,7 @@
             <form method="post" action="/admin/beloftes/{{ promise.id }}/bewijs/nieuw">
                 <div class="form-group">
                     <label class="form-label">Titel *</label>
-                    <input type="text" name="title" class="form-input" required placeholder="bijv. Wet op de AOW-leeftijd aangenomen">
+                    <input type="text" name="title" class="form-input" required placeholder="bijv. Wet aangenomen door Eerste Kamer">
                 </div>
                 <div class="form-group">
                     <label class="form-label">URL</label>
@@ -119,6 +134,7 @@
                         <select name="source_type" class="form-select">
                             <option value="">Selecteer type</option>
                             <option>Wetgeving</option>
+                            <option>Stemming</option>
                             <option>Persbericht</option>
                             <option>Nieuwsartikel</option>
                             <option>Kamerstuk</option>

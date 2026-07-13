@@ -69,7 +69,7 @@
                     <tr>
                         <td><a href="/admin/beloftes/{{ p.id }}">{{ p.title[:60] }}{% if p.title|length > 60 %}...{% endif %}</a></td>
                         <td><span class="status-badge status-{{ p.status.name }}">{{ p.status.value }}</span></td>
-                        <td>{{ p.cabinet.name }}</td>
+                        <td>{% if p.cabinet %}{{ p.cabinet.name }}{% elif p.party %}{{ p.party.abbreviation }}{% else %}–{% endif %}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

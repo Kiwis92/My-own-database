@@ -4,63 +4,80 @@
 {% block content %}
 <div class="container page-body">
     <div class="breadcrumb">
-        <a href="/">Home</a> / <a href="/kabinetten">Kabinetten</a> / <span>{{ cabinet.name }}</span>
+        <a href="/">{{ _('nav.home') }}</a> / <a href="/kabinetten">{{ _('cabinets.title') }}</a> / <span>{{ cabinet.name }}</span>
     </div>
 
     <div class="cabinet-hero">
         <div class="cabinet-hero-text">
-            <div class="cabinet-period">{{ cabinet.year_start }}{% if cabinet.year_end %} – {{ cabinet.year_end }}{% else %} – heden{% endif %}</div>
+            <div class="cabinet-period">
+                {{ cabinet.year_start }} – {{ cabinet.year_end or _('common.until_now') }}
+                {% if not cabinet.end_date %}<span class="cab-badge cab-current">{{ _('cabinets.current') }}</span>
+                {% elif cabinet.fell %}<span class="cab-badge cab-fell">{{ _('cabinets.fell') }}</span>{% endif %}
+            </div>
             <h1>{{ cabinet.name }}</h1>
+            {% if cabinet.premier %}<p class="cabinet-premier-lg">{{ _('party.premier') }}: <strong>{{ cabinet.premier }}</strong></p>{% endif %}
             {% if cabinet.parties %}
             <div class="cabinet-parties">
                 {% for party in cabinet.parties %}
-                <span class="party-chip party-chip-lg" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">
-                    {{ party.abbreviation }} – {{ party.name }}
-                </span>
+                <a href="/partij/{{ party.id }}" class="party-chip party-chip-lg" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">
+                    {{ party.abbreviation }}
+                </a>
                 {% endfor %}
             </div>
             {% endif %}
             {% if cabinet.description %}
             <p class="cabinet-about">{{ cabinet.description }}</p>
             {% endif %}
+            {% if cabinet.fell and cabinet.fall_reason %}
+            <div class="fall-reason-box">
+                <strong>{{ _('cabinet.fall_reason') }}:</strong> {{ cabinet.fall_reason }}
+            </div>
+            {% endif %}
             {% if cabinet.coalition_agreement_url %}
-            <a href="{{ cabinet.coalition_agreement_url }}" target="_blank" rel="noopener" class="btn btn-outline">📄 Regeerakkoord ↗</a>
+            <a href="{{ cabinet.coalition_agreement_url }}" target="_blank" rel="noopener" class="btn btn-outline">📄 {{ _('cabinet.agreement') }} ↗</a>
             {% endif %}
         </div>
 
-        <!-- Status donut summary -->
-        {% if total > 0 %}
-        <div class="cabinet-summary-card">
-            <h3>Voortgang beloftes</h3>
-            <div class="summary-stats">
-                {% for status_name, count in promises_by_status.items() %}
-                {% if count > 0 %}
-                <div class="summary-row">
-                    <span class="status-badge status-{{ loop.index | string | replace('1','beloofd') | replace('2','in_uitvoering') | replace('3','waargemaakt') | replace('4','gebroken') | replace('5','geparkeerd') }}
-                    {% if status_name == 'Beloofd' %}status-beloofd
-                    {% elif status_name == 'In Uitvoering' %}status-in_uitvoering
-                    {% elif status_name == 'Waargemaakt' %}status-waargemaakt
-                    {% elif status_name == 'Gebroken' %}status-gebroken
-                    {% elif status_name == 'Geparkeerd' %}status-geparkeerd
-                    {% endif %}">{{ status_name }}</span>
-                    <span class="summary-count">{{ count }}</span>
-                    <span class="summary-pct">{{ (count / total * 100) | round | int }}%</span>
+        <div class="cabinet-hero-side">
+            {% if total > 0 %}
+            <div class="cabinet-summary-card">
+                <h3>{{ _('cabinet.progress') }}</h3>
+                <div class="summary-stats">
+                    {% for status in statuses %}
+                    {% set count = promises_by_status[status.value] %}
+                    {% if count > 0 %}
+                    <div class="summary-row">
+                        <span class="status-badge status-{{ status.name }}">{{ _('status.' + status.name) }}</span>
+                        <span class="summary-count">{{ count }}</span>
+                        <span class="summary-pct">{{ (count / total * 100) | round | int }}%</span>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
-                {% endif %}
-                {% endfor %}
+                <div class="summary-total">{{ total }} {{ _('cabinet.total') }}</div>
             </div>
-            <div class="summary-total">{{ total }} beloftes totaal</div>
+            {% endif %}
+
+            {% if highlights %}
+            <div class="cabinet-summary-card">
+                <h3>{{ _('cabinet.highlights') }}</h3>
+                <ul class="highlights-list">
+                    {% for h in highlights %}
+                    <li>{{ h }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
     <!-- Category breakdown -->
     {% if promises_by_category %}
     <div class="category-breakdown">
-        <h2>Per onderwerp</h2>
+        <h2>{{ _('cabinet.per_topic') }}</h2>
         <div class="category-tags">
             {% for cat, count in promises_by_category.items() %}
-            <a href="/beloftes?cabinet_id={{ cabinet.id }}&category={{ cat | lower | replace(' ', '_') | replace('&', '') }}" class="category-tag">
+            <a href="/beloftes?cabinet_id={{ cabinet.id }}&category={{ cat }}" class="category-tag">
                 {{ cat }} <span class="cat-count">{{ count }}</span>
             </a>
             {% endfor %}
@@ -68,15 +85,17 @@
     </div>
     {% endif %}
 
-    <!-- Promises list -->
+    <!-- Regeerakkoord-beloftes -->
+    {% if promises %}
     <div class="cabinet-promises-section">
         <div class="section-header">
-            <h2>Alle beloftes</h2>
+            <h2>{{ _('cabinet.all_promises') }}</h2>
             <div class="filter-tabs" id="statusTabs">
-                <button class="tab-btn active" data-filter="all">Alle ({{ total }})</button>
-                {% for status_name, count in promises_by_status.items() %}
+                <button class="tab-btn active" data-filter="all">{{ _('cabinet.all') }} ({{ total }})</button>
+                {% for status in statuses %}
+                {% set count = promises_by_status[status.value] %}
                 {% if count > 0 %}
-                <button class="tab-btn" data-filter="{{ status_name }}">{{ status_name }} ({{ count }})</button>
+                <button class="tab-btn" data-filter="{{ status.value }}">{{ _('status.' + status.name) }} ({{ count }})</button>
                 {% endif %}
                 {% endfor %}
             </div>
@@ -86,29 +105,45 @@
             {% for promise in promises %}
             <a href="/belofte/{{ promise.id }}" class="promise-card promise-grid-card" data-status="{{ promise.status.value }}">
                 <div class="promise-card-header">
-                    <span class="status-badge status-{{ promise.status.name }}">{{ promise.status.value }}</span>
-                    <span class="promise-category">{{ promise.category.value }}</span>
+                    <span class="status-badge status-{{ promise.status.name }}">{{ _('status.' + promise.status.name) }}</span>
+                    <span class="promise-category">{{ promise.category }}</span>
                 </div>
                 <h3 class="promise-title">{{ promise.title }}</h3>
-                {% if promise.description %}
-                <p class="promise-desc">{{ promise.description[:120] }}{% if promise.description|length > 120 %}...{% endif %}</p>
-                {% endif %}
                 {% if promise.evidence %}
-                <div class="promise-evidence-count">📎 {{ promise.evidence|length }} bron{% if promise.evidence|length != 1 %}nen{% endif %}</div>
+                <div class="promise-evidence-count">📎 {{ promise.evidence|length }} {{ _('promises.sources_count') }}</div>
                 {% endif %}
             </a>
             {% endfor %}
         </div>
-
-        {% if not promises %}
-        <div class="empty-state">
-            <div class="empty-icon">📋</div>
-            <h3>Nog geen beloftes</h3>
-            <p>Voeg beloftes toe via het beheerspaneel.</p>
-            <a href="/admin/beloftes/nieuw" class="btn btn-primary">Belofte toevoegen</a>
-        </div>
-        {% endif %}
     </div>
+    {% endif %}
+
+    <!-- Verkiezingsbeloftes coalitiepartijen -->
+    {% if coalition_promises %}
+    <div class="cabinet-promises-section">
+        <div class="section-header">
+            <h2>{{ _('cabinet.coalition_promises') }}</h2>
+        </div>
+        <div class="promises-list">
+            {% for promise in coalition_promises %}
+            <a href="/belofte/{{ promise.id }}" class="promise-row">
+                <span class="party-chip" style="background-color: {{ promise.party.color }}20; color: {{ promise.party.color }}; border: 1px solid {{ promise.party.color }}40">{{ promise.party.abbreviation }}</span>
+                <span class="status-badge status-{{ promise.status.name }}">{{ _('status.' + promise.status.name) }}</span>
+                <span class="promise-row-title">{{ promise.title }}</span>
+                <span class="promise-row-cat">{{ promise.category }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if not promises and not coalition_promises %}
+    <div class="empty-state">
+        <div class="empty-icon">📋</div>
+        <h3>{{ _('cabinet.empty.title') }}</h3>
+        <p>{{ _('cabinet.empty.text') }}</p>
+    </div>
+    {% endif %}
 </div>
 
 {% block scripts %}
@@ -119,11 +154,7 @@
             this.classList.add('active');
             const filter = this.dataset.filter;
             document.querySelectorAll('.promise-grid-card').forEach(card => {
-                if (filter === 'all' || card.dataset.status === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (filter === 'all' || card.dataset.status === filter) ? '' : 'none';
             });
         });
     });

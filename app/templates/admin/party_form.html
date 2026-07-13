@@ -17,21 +17,40 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Afkorting *</label>
-                <input type="text" name="abbreviation" class="form-input" value="{{ party.abbreviation if party else '' }}" required placeholder="bijv. VVD" maxlength="10">
+                <input type="text" name="abbreviation" class="form-input" value="{{ party.abbreviation if party else '' }}" required placeholder="bijv. VVD" maxlength="20">
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="form-label">Kleur</label>
-            <div class="color-input-wrap">
-                <input type="color" name="color" class="form-input-color" value="{{ party.color if party else '#3B82F6' }}">
-                <span class="color-hint">Selecteer de partijkleur</span>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Ideologie</label>
+                <input type="text" name="ideology" class="form-input" value="{{ party.ideology if party and party.ideology else '' }}" placeholder="bijv. Liberaal-conservatief">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Opgericht (jaar)</label>
+                <input type="number" name="founded_year" class="form-input" value="{{ party.founded_year if party and party.founded_year else '' }}" min="1800" max="2100">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Huidige zetels</label>
+                <input type="number" name="current_seats" class="form-input" value="{{ party.current_seats if party and party.current_seats is not none else '' }}" min="0" max="150">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Kleur</label>
+                <div class="color-input-wrap">
+                    <input type="color" name="color" class="form-input-color" value="{{ party.color if party else '#3B82F6' }}">
+                    <label class="checkbox-item" style="border: none; padding-left: 1rem">
+                        <input type="checkbox" name="active" value="1" {% if not party or party.active %}checked{% endif %}> Actief
+                    </label>
+                </div>
             </div>
         </div>
 
         <div class="form-group">
             <label class="form-label">Omschrijving</label>
-            <textarea name="description" class="form-textarea" rows="3" placeholder="Korte omschrijving van de partij">{{ party.description if party else '' }}</textarea>
+            <textarea name="description" class="form-textarea" rows="3" placeholder="Korte omschrijving van de partij">{{ party.description if party and party.description else '' }}</textarea>
         </div>
 
         <div class="form-actions">

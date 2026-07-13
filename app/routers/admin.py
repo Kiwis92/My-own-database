@@ -1,5 +1,6 @@
 import os
-from fastapi import APIRouter, Depends, Request, HTTPException, Form, status
+from datetime import date
+from fastapi import APIRouter, Depends, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
@@ -8,7 +9,10 @@ from itsdangerous import URLSafeTimedSerializer
 from dotenv import load_dotenv
 
 from ..database import get_db
-from ..models import Party, Cabinet, Promise, Evidence, PromiseStatus, PromiseCategory, cabinet_party
+from ..models import (
+    Country, Party, Cabinet, Promise, Evidence,
+    PromiseStatus, PromiseSource,
+)
 
 load_dotenv()
 
@@ -20,22 +24,8 @@ ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 serializer = URLSafeTimedSerializer(SECRET_KEY)
 
 
-def get_session_token(request: Request) -> Optional[str]:
-    return request.cookies.get("admin_session")
-
-
-def require_auth(request: Request):
-    token = get_session_token(request)
-    if not token:
-        raise HTTPException(status_code=302, headers={"Location": "/admin/login"})
-    try:
-        serializer.loads(token, max_age=86400)
-    except Exception:
-        raise HTTPException(status_code=302, headers={"Location": "/admin/login"})
-
-
 def is_authenticated(request: Request) -> bool:
-    token = get_session_token(request)
+    token = request.cookies.get("admin_session")
     if not token:
         return False
     try:
@@ -49,6 +39,29 @@ def auth_redirect(request: Request):
     if not is_authenticated(request):
         return RedirectResponse(url="/admin/login", status_code=302)
     return None
+
+
+def default_country(db: Session) -> Country:
+    country = db.query(Country).filter(Country.code == "nl").first()
+    if not country:
+        country = Country(code="nl", name="Nederland", legislature_name="Tweede Kamer")
+        db.add(country)
+        db.flush()
+    return country
+
+
+def distinct_categories(db: Session):
+    rows = db.query(Promise.category).distinct().order_by(Promise.category).all()
+    return [r[0] for r in rows if r[0]]
+
+
+def parse_date_str(s: Optional[str]):
+    if not s:
+        return None
+    try:
+        return date.fromisoformat(s)
+    except ValueError:
+        return None
 
 
 # --- Auth ---
@@ -66,8 +79,7 @@ def login(request: Request, password: str = Form(...)):
         response.set_cookie("admin_session", token, httponly=True, max_age=86400)
         return response
     return templates.TemplateResponse("admin/login.html", {
-        "request": request,
-        "error": "Onjuist wachtwoord"
+        "request": request, "error": "Onjuist wachtwoord"
     })
 
 
@@ -86,26 +98,18 @@ def admin_dashboard(request: Request, db: Session = Depends(get_db)):
     if redir:
         return redir
 
-    from ..models import PromiseStatus
-    total_promises = db.query(Promise).count()
-    total_parties = db.query(Party).count()
-    total_cabinets = db.query(Cabinet).count()
-    fulfilled = db.query(Promise).filter(Promise.status == PromiseStatus.waargemaakt).count()
-    broken = db.query(Promise).filter(Promise.status == PromiseStatus.gebroken).count()
-    in_progress = db.query(Promise).filter(Promise.status == PromiseStatus.in_uitvoering).count()
-    recent_promises = db.query(Promise).order_by(Promise.created_at.desc()).limit(5).all()
+    stats = {
+        "total_promises": db.query(Promise).count(),
+        "total_parties": db.query(Party).count(),
+        "total_cabinets": db.query(Cabinet).count(),
+        "fulfilled": db.query(Promise).filter(Promise.status == PromiseStatus.waargemaakt).count(),
+        "broken": db.query(Promise).filter(Promise.status == PromiseStatus.gebroken).count(),
+        "in_progress": db.query(Promise).filter(Promise.status == PromiseStatus.in_uitvoering).count(),
+    }
+    recent_promises = db.query(Promise).order_by(Promise.id.desc()).limit(5).all()
 
     return templates.TemplateResponse("admin/dashboard.html", {
-        "request": request,
-        "stats": {
-            "total_promises": total_promises,
-            "total_parties": total_parties,
-            "total_cabinets": total_cabinets,
-            "fulfilled": fulfilled,
-            "broken": broken,
-            "in_progress": in_progress,
-        },
-        "recent_promises": recent_promises,
+        "request": request, "stats": stats, "recent_promises": recent_promises,
     })
 
 
@@ -116,7 +120,7 @@ def admin_parties(request: Request, db: Session = Depends(get_db)):
     redir = auth_redirect(request)
     if redir:
         return redir
-    parties = db.query(Party).order_by(Party.name).all()
+    parties = db.query(Party).order_by(Party.active.desc(), Party.name).all()
     return templates.TemplateResponse("admin/parties.html", {"request": request, "parties": parties})
 
 
@@ -135,19 +139,28 @@ def create_party(
     name: str = Form(...),
     abbreviation: str = Form(...),
     color: str = Form("#3B82F6"),
+    ideology: str = Form(""),
+    founded_year: Optional[int] = Form(None),
+    current_seats: Optional[int] = Form(None),
+    active: Optional[str] = Form(None),
     description: str = Form(""),
 ):
     redir = auth_redirect(request)
     if redir:
         return redir
-    existing = db.query(Party).filter(Party.abbreviation == abbreviation.upper()).first()
+    country = default_country(db)
+    existing = db.query(Party).filter(
+        Party.country_id == country.id, Party.abbreviation == abbreviation).first()
     if existing:
         return templates.TemplateResponse("admin/party_form.html", {
-            "request": request,
-            "party": None,
+            "request": request, "party": None,
             "error": f"Afkorting '{abbreviation}' bestaat al."
         })
-    party = Party(name=name, abbreviation=abbreviation.upper(), color=color, description=description)
+    party = Party(
+        country_id=country.id, name=name, abbreviation=abbreviation, color=color,
+        ideology=ideology or None, founded_year=founded_year,
+        current_seats=current_seats, active=bool(active), description=description,
+    )
     db.add(party)
     db.commit()
     return RedirectResponse(url="/admin/partijen", status_code=302)
@@ -172,6 +185,10 @@ def update_party(
     name: str = Form(...),
     abbreviation: str = Form(...),
     color: str = Form("#3B82F6"),
+    ideology: str = Form(""),
+    founded_year: Optional[int] = Form(None),
+    current_seats: Optional[int] = Form(None),
+    active: Optional[str] = Form(None),
     description: str = Form(""),
 ):
     redir = auth_redirect(request)
@@ -181,8 +198,12 @@ def update_party(
     if not party:
         raise HTTPException(status_code=404)
     party.name = name
-    party.abbreviation = abbreviation.upper()
+    party.abbreviation = abbreviation
     party.color = color
+    party.ideology = ideology or None
+    party.founded_year = founded_year
+    party.current_seats = current_seats
+    party.active = bool(active)
     party.description = description
     db.commit()
     return RedirectResponse(url="/admin/partijen", status_code=302)
@@ -207,7 +228,7 @@ def admin_cabinets(request: Request, db: Session = Depends(get_db)):
     redir = auth_redirect(request)
     if redir:
         return redir
-    cabinets = db.query(Cabinet).order_by(Cabinet.year_start.desc()).all()
+    cabinets = db.query(Cabinet).order_by(Cabinet.start_date.desc()).all()
     return templates.TemplateResponse("admin/cabinets.html", {"request": request, "cabinets": cabinets})
 
 
@@ -218,7 +239,8 @@ def new_cabinet_form(request: Request, db: Session = Depends(get_db)):
         return redir
     parties = db.query(Party).order_by(Party.name).all()
     return templates.TemplateResponse("admin/cabinet_form.html", {
-        "request": request, "cabinet": None, "parties": parties, "error": None
+        "request": request, "cabinet": None, "parties": parties,
+        "selected_party_ids": [], "error": None
     })
 
 
@@ -227,8 +249,11 @@ def create_cabinet(
     request: Request,
     db: Session = Depends(get_db),
     name: str = Form(...),
-    year_start: int = Form(...),
-    year_end: Optional[int] = Form(None),
+    premier: str = Form(""),
+    start_date: str = Form(""),
+    end_date: str = Form(""),
+    fell: Optional[str] = Form(None),
+    fall_reason: str = Form(""),
     description: str = Form(""),
     coalition_agreement_url: str = Form(""),
     party_ids: list[int] = Form([]),
@@ -236,19 +261,17 @@ def create_cabinet(
     redir = auth_redirect(request)
     if redir:
         return redir
+    country = default_country(db)
     cabinet = Cabinet(
-        name=name,
-        year_start=year_start,
-        year_end=year_end if year_end else None,
-        description=description,
-        coalition_agreement_url=coalition_agreement_url if coalition_agreement_url else None,
+        country_id=country.id, name=name, premier=premier or None,
+        start_date=parse_date_str(start_date), end_date=parse_date_str(end_date),
+        fell=bool(fell), fall_reason=fall_reason or None,
+        description=description or None,
+        coalition_agreement_url=coalition_agreement_url or None,
     )
     db.add(cabinet)
     db.flush()
-    for pid in party_ids:
-        party = db.query(Party).filter(Party.id == pid).first()
-        if party:
-            cabinet.parties.append(party)
+    cabinet.parties = [p for p in db.query(Party).filter(Party.id.in_(party_ids)).all()] if party_ids else []
     db.commit()
     return RedirectResponse(url="/admin/kabinetten", status_code=302)
 
@@ -262,10 +285,9 @@ def edit_cabinet_form(request: Request, cabinet_id: int, db: Session = Depends(g
     if not cabinet:
         raise HTTPException(status_code=404)
     parties = db.query(Party).order_by(Party.name).all()
-    selected_party_ids = [p.id for p in cabinet.parties]
     return templates.TemplateResponse("admin/cabinet_form.html", {
         "request": request, "cabinet": cabinet, "parties": parties,
-        "selected_party_ids": selected_party_ids, "error": None
+        "selected_party_ids": [p.id for p in cabinet.parties], "error": None
     })
 
 
@@ -275,8 +297,11 @@ def update_cabinet(
     cabinet_id: int,
     db: Session = Depends(get_db),
     name: str = Form(...),
-    year_start: int = Form(...),
-    year_end: Optional[int] = Form(None),
+    premier: str = Form(""),
+    start_date: str = Form(""),
+    end_date: str = Form(""),
+    fell: Optional[str] = Form(None),
+    fall_reason: str = Form(""),
     description: str = Form(""),
     coalition_agreement_url: str = Form(""),
     party_ids: list[int] = Form([]),
@@ -288,15 +313,14 @@ def update_cabinet(
     if not cabinet:
         raise HTTPException(status_code=404)
     cabinet.name = name
-    cabinet.year_start = year_start
-    cabinet.year_end = year_end if year_end else None
-    cabinet.description = description
-    cabinet.coalition_agreement_url = coalition_agreement_url if coalition_agreement_url else None
-    cabinet.parties = []
-    for pid in party_ids:
-        party = db.query(Party).filter(Party.id == pid).first()
-        if party:
-            cabinet.parties.append(party)
+    cabinet.premier = premier or None
+    cabinet.start_date = parse_date_str(start_date)
+    cabinet.end_date = parse_date_str(end_date)
+    cabinet.fell = bool(fell)
+    cabinet.fall_reason = fall_reason or None
+    cabinet.description = description or None
+    cabinet.coalition_agreement_url = coalition_agreement_url or None
+    cabinet.parties = [p for p in db.query(Party).filter(Party.id.in_(party_ids)).all()] if party_ids else []
     db.commit()
     return RedirectResponse(url="/admin/kabinetten", status_code=302)
 
@@ -315,11 +339,25 @@ def delete_cabinet(request: Request, cabinet_id: int, db: Session = Depends(get_
 
 # --- Promises ---
 
+def promise_form_context(request: Request, db: Session, promise=None, error=None):
+    return {
+        "request": request,
+        "promise": promise,
+        "cabinets": db.query(Cabinet).order_by(Cabinet.start_date.desc()).all(),
+        "parties": db.query(Party).order_by(Party.name).all(),
+        "statuses": list(PromiseStatus),
+        "sources": list(PromiseSource),
+        "categories": distinct_categories(db),
+        "error": error,
+    }
+
+
 @router.get("/beloftes", response_class=HTMLResponse)
 def admin_promises(
     request: Request,
     db: Session = Depends(get_db),
     cabinet_id: Optional[int] = None,
+    party_id: Optional[int] = None,
     status: Optional[str] = None,
 ):
     redir = auth_redirect(request)
@@ -328,16 +366,18 @@ def admin_promises(
     query = db.query(Promise)
     if cabinet_id:
         query = query.filter(Promise.cabinet_id == cabinet_id)
-    if status:
-        query = query.filter(Promise.status == status)
-    promises = query.order_by(Promise.created_at.desc()).all()
-    cabinets = db.query(Cabinet).order_by(Cabinet.year_start.desc()).all()
+    if party_id:
+        query = query.filter(Promise.party_id == party_id)
+    if status and status in PromiseStatus.__members__:
+        query = query.filter(Promise.status == PromiseStatus[status])
+    promises = query.order_by(Promise.id.desc()).all()
     return templates.TemplateResponse("admin/promises.html", {
         "request": request,
         "promises": promises,
-        "cabinets": cabinets,
+        "cabinets": db.query(Cabinet).order_by(Cabinet.start_date.desc()).all(),
+        "parties": db.query(Party).order_by(Party.name).all(),
         "statuses": list(PromiseStatus),
-        "filters": {"cabinet_id": cabinet_id, "status": status},
+        "filters": {"cabinet_id": cabinet_id, "party_id": party_id, "status": status},
     })
 
 
@@ -346,42 +386,41 @@ def new_promise_form(request: Request, db: Session = Depends(get_db)):
     redir = auth_redirect(request)
     if redir:
         return redir
-    cabinets = db.query(Cabinet).order_by(Cabinet.year_start.desc()).all()
-    parties = db.query(Party).order_by(Party.name).all()
-    return templates.TemplateResponse("admin/promise_form.html", {
-        "request": request,
-        "promise": None,
-        "cabinets": cabinets,
-        "parties": parties,
-        "statuses": list(PromiseStatus),
-        "categories": list(PromiseCategory),
-        "error": None,
-    })
+    return templates.TemplateResponse("admin/promise_form.html",
+                                      promise_form_context(request, db))
 
 
 @router.post("/beloftes/nieuw")
 def create_promise(
     request: Request,
     db: Session = Depends(get_db),
-    cabinet_id: int = Form(...),
+    source_kind: str = Form("regeerakkoord"),
+    cabinet_id: Optional[int] = Form(None),
     party_id: Optional[int] = Form(None),
+    election_year: Optional[int] = Form(None),
     title: str = Form(...),
     description: str = Form(""),
-    category: str = Form("overig"),
+    category: str = Form("Overig"),
     status: str = Form("beloofd"),
     source_text: str = Form(""),
 ):
     redir = auth_redirect(request)
     if redir:
         return redir
+    if not cabinet_id and not party_id:
+        return templates.TemplateResponse(
+            "admin/promise_form.html",
+            promise_form_context(request, db, error="Kies minimaal een kabinet of een partij."))
     promise = Promise(
-        cabinet_id=cabinet_id,
-        party_id=party_id if party_id else None,
+        source_kind=PromiseSource[source_kind] if source_kind in PromiseSource.__members__ else PromiseSource.regeerakkoord,
+        cabinet_id=cabinet_id or None,
+        party_id=party_id or None,
+        election_year=election_year,
         title=title,
-        description=description,
-        category=category,
-        status=status,
-        source_text=source_text if source_text else None,
+        description=description or None,
+        category=category.strip() or "Overig",
+        status=PromiseStatus[status] if status in PromiseStatus.__members__ else PromiseStatus.beloofd,
+        source_text=source_text or None,
     )
     db.add(promise)
     db.commit()
@@ -396,16 +435,8 @@ def admin_promise_detail(request: Request, promise_id: int, db: Session = Depend
     promise = db.query(Promise).filter(Promise.id == promise_id).first()
     if not promise:
         raise HTTPException(status_code=404)
-    cabinets = db.query(Cabinet).order_by(Cabinet.year_start.desc()).all()
-    parties = db.query(Party).order_by(Party.name).all()
-    return templates.TemplateResponse("admin/promise_detail.html", {
-        "request": request,
-        "promise": promise,
-        "cabinets": cabinets,
-        "parties": parties,
-        "statuses": list(PromiseStatus),
-        "categories": list(PromiseCategory),
-    })
+    return templates.TemplateResponse("admin/promise_detail.html",
+                                      promise_form_context(request, db, promise=promise))
 
 
 @router.post("/beloftes/{promise_id}/bewerk")
@@ -413,11 +444,13 @@ def update_promise(
     request: Request,
     promise_id: int,
     db: Session = Depends(get_db),
-    cabinet_id: int = Form(...),
+    source_kind: str = Form("regeerakkoord"),
+    cabinet_id: Optional[int] = Form(None),
     party_id: Optional[int] = Form(None),
+    election_year: Optional[int] = Form(None),
     title: str = Form(...),
     description: str = Form(""),
-    category: str = Form("overig"),
+    category: str = Form("Overig"),
     status: str = Form("beloofd"),
     source_text: str = Form(""),
 ):
@@ -427,13 +460,17 @@ def update_promise(
     promise = db.query(Promise).filter(Promise.id == promise_id).first()
     if not promise:
         raise HTTPException(status_code=404)
-    promise.cabinet_id = cabinet_id
-    promise.party_id = party_id if party_id else None
+    if source_kind in PromiseSource.__members__:
+        promise.source_kind = PromiseSource[source_kind]
+    promise.cabinet_id = cabinet_id or None
+    promise.party_id = party_id or None
+    promise.election_year = election_year
     promise.title = title
-    promise.description = description
-    promise.category = category
-    promise.status = status
-    promise.source_text = source_text if source_text else None
+    promise.description = description or None
+    promise.category = category.strip() or "Overig"
+    if status in PromiseStatus.__members__:
+        promise.status = PromiseStatus[status]
+    promise.source_text = source_text or None
     db.commit()
     return RedirectResponse(url=f"/admin/beloftes/{promise_id}", status_code=302)
 
@@ -466,20 +503,13 @@ def add_evidence(
     redir = auth_redirect(request)
     if redir:
         return redir
-    from datetime import date
-    date_obj = None
-    if date_published:
-        try:
-            date_obj = date.fromisoformat(date_published)
-        except ValueError:
-            pass
     evidence = Evidence(
         promise_id=promise_id,
         title=title,
-        url=url if url else None,
-        description=description if description else None,
-        source_type=source_type if source_type else None,
-        date_published=date_obj,
+        url=url or None,
+        description=description or None,
+        source_type=source_type or None,
+        date_published=parse_date_str(date_published),
     )
     db.add(evidence)
     db.commit()

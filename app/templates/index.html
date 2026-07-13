@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}{{ _('nav.home') }}{% endblock %}
 
 {% block content %}
 <!-- Hero -->
 <section class="hero">
     <div class="container">
         <div class="hero-content">
-            <span class="hero-badge">Onafhankelijk & Data-gedreven</span>
-            <h1>Houden politici <span class="highlight">hun beloftes</span>?</h1>
-            <p class="hero-sub">PoliTrack centraliseert en monitort de beloftes van coalitieakkoorden. Transparant, feitelijk en continu bijgewerkt.</p>
+            <span class="hero-badge">{{ _('home.badge') }}</span>
+            <h1>{{ _('home.title.pre') }} <span class="highlight">{{ _('home.title.highlight') }}</span>{{ _('home.title.post') }}</h1>
+            <p class="hero-sub">{{ _('home.subtitle') }}</p>
             <div class="hero-actions">
-                <a href="/beloftes" class="btn btn-primary btn-lg">Bekijk alle beloftes</a>
-                <a href="/kabinetten" class="btn btn-outline btn-lg">Per kabinet</a>
+                <a href="/beloftes" class="btn btn-primary btn-lg">{{ _('home.cta.promises') }}</a>
+                <a href="/partijen" class="btn btn-outline btn-lg">{{ _('home.cta.parties') }}</a>
             </div>
         </div>
     </div>
@@ -24,29 +24,53 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">{{ stats.total }}</div>
-                <div class="stat-label">Totaal beloftes</div>
+                <div class="stat-label">{{ _('home.stats.total') }}</div>
             </div>
             <div class="stat-card stat-green">
                 <div class="stat-number">{{ stats.fulfilled }}</div>
-                <div class="stat-label">Waargemaakt</div>
+                <div class="stat-label">{{ _('home.stats.fulfilled') }}</div>
                 <div class="stat-pct">{{ stats.pct_fulfilled }}%</div>
+            </div>
+            <div class="stat-card stat-teal">
+                <div class="stat-number">{{ stats.deels }}</div>
+                <div class="stat-label">{{ _('home.stats.partly') }}</div>
             </div>
             <div class="stat-card stat-yellow">
                 <div class="stat-number">{{ stats.in_progress }}</div>
-                <div class="stat-label">In uitvoering</div>
+                <div class="stat-label">{{ _('home.stats.in_progress') }}</div>
             </div>
             <div class="stat-card stat-red">
                 <div class="stat-number">{{ stats.broken }}</div>
-                <div class="stat-label">Gebroken</div>
+                <div class="stat-label">{{ _('home.stats.broken') }}</div>
             </div>
             <div class="stat-card stat-blue">
                 <div class="stat-number">{{ stats.beloofd }}</div>
-                <div class="stat-label">Beloofd</div>
+                <div class="stat-label">{{ _('home.stats.promised') }}</div>
             </div>
             <div class="stat-card stat-gray">
                 <div class="stat-number">{{ stats.geparkeerd }}</div>
-                <div class="stat-label">Geparkeerd</div>
+                <div class="stat-label">{{ _('home.stats.parked') }}</div>
             </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Partijen -->
+{% if parties %}
+<section class="parties-strip-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>{{ _('home.parties.title') }}</h2>
+            <a href="/partijen" class="btn btn-ghost">{{ _('home.parties.all') }} →</a>
+        </div>
+        <div class="parties-strip">
+            {% for party in parties %}
+            <a href="/partij/{{ party.id }}" class="party-strip-card" style="border-top: 4px solid {{ party.color }}">
+                <span class="party-strip-abbr" style="color: {{ party.color }}">{{ party.abbreviation }}</span>
+                <span class="party-strip-seats">{{ party.current_seats }} {{ _('parties.seats') }}</span>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -57,13 +81,13 @@
 <section class="cabinets-section">
     <div class="container">
         <div class="section-header">
-            <h2>Kabinetten</h2>
-            <a href="/kabinetten" class="btn btn-ghost">Alle kabinetten →</a>
+            <h2>{{ _('home.cabinets.title') }}</h2>
+            <a href="/kabinetten" class="btn btn-ghost">{{ _('home.cabinets.all') }} →</a>
         </div>
         <div class="cabinet-cards">
             {% for cabinet in cabinets %}
             <a href="/kabinet/{{ cabinet.id }}" class="cabinet-card">
-                <div class="cabinet-period">{{ cabinet.year_start }}{% if cabinet.year_end %} – {{ cabinet.year_end }}{% else %} – heden{% endif %}</div>
+                <div class="cabinet-period">{{ cabinet.year_start }}{% if cabinet.year_end %} – {{ cabinet.year_end }}{% else %} – {{ _('common.until_now') }}{% endif %}</div>
                 <h3 class="cabinet-name">{{ cabinet.name }}</h3>
                 {% if cabinet.parties %}
                 <div class="cabinet-parties">
@@ -72,23 +96,9 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                {% if cabinet.description %}
-                <p class="cabinet-desc">{{ cabinet.description[:120] }}{% if cabinet.description|length > 120 %}...{% endif %}</p>
-                {% endif %}
-                <span class="cabinet-link">Bekijk beloftes →</span>
+                {% if cabinet.premier %}<p class="cabinet-desc">{{ _('party.premier') }}: {{ cabinet.premier }}</p>{% endif %}
             </a>
             {% endfor %}
-        </div>
-    </div>
-</section>
-{% else %}
-<section class="empty-state-section">
-    <div class="container">
-        <div class="empty-state">
-            <div class="empty-icon">🏛️</div>
-            <h2>Welkom bij PoliTrack</h2>
-            <p>Er zijn nog geen gegevens ingevoerd. Ga naar het beheerderspaneel om kabinetten en beloftes toe te voegen.</p>
-            <a href="/admin" class="btn btn-primary">Ga naar beheer</a>
         </div>
     </div>
 </section>
@@ -97,27 +107,27 @@
 <!-- How it works -->
 <section class="how-section">
     <div class="container">
-        <h2 class="section-title">Hoe werkt PoliTrack?</h2>
+        <h2 class="section-title">{{ _('home.how.title') }}</h2>
         <div class="how-grid">
             <div class="how-card">
                 <div class="how-icon">📋</div>
-                <h3>Beloftes verzamelen</h3>
-                <p>Alle beloftes uit regeerakkoorden worden zorgvuldig gedocumenteerd en gecategoriseerd.</p>
+                <h3>{{ _('home.how.1.title') }}</h3>
+                <p>{{ _('home.how.1.text') }}</p>
             </div>
             <div class="how-card">
                 <div class="how-icon">🔍</div>
-                <h3>Voortgang volgen</h3>
-                <p>Elke belofte krijgt een status: Beloofd, In Uitvoering, Waargemaakt, Gebroken of Geparkeerd.</p>
+                <h3>{{ _('home.how.2.title') }}</h3>
+                <p>{{ _('home.how.2.text') }}</p>
             </div>
             <div class="how-card">
                 <div class="how-icon">📎</div>
-                <h3>Bewijs toevoegen</h3>
-                <p>Elke statuswijziging wordt onderbouwd met links naar wetgeving, persberichten of nieuwsartikelen.</p>
+                <h3>{{ _('home.how.3.title') }}</h3>
+                <p>{{ _('home.how.3.text') }}</p>
             </div>
             <div class="how-card">
                 <div class="how-icon">📊</div>
-                <h3>Transparant rapporteren</h3>
-                <p>Bezoekers kunnen filteren op partij, kabinet, onderwerp en status voor een volledig overzicht.</p>
+                <h3>{{ _('home.how.4.title') }}</h3>
+                <p>{{ _('home.how.4.text') }}</p>
             </div>
         </div>
     </div>

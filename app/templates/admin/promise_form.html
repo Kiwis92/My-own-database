@@ -12,21 +12,34 @@
     <form method="post" action="/admin/beloftes/nieuw">
         <div class="form-row">
             <div class="form-group">
-                <label class="form-label">Kabinet *</label>
-                <select name="cabinet_id" class="form-select" required>
-                    <option value="">Selecteer kabinet</option>
+                <label class="form-label">Soort belofte *</label>
+                <select name="source_kind" class="form-select" id="sourceKind">
+                    <option value="regeerakkoord">Regeerakkoord</option>
+                    <option value="verkiezingsprogramma">Verkiezingsprogramma</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Verkiezingsjaar <span class="form-hint-inline">(bij verkiezingsprogramma)</span></label>
+                <input type="number" name="election_year" class="form-input" placeholder="bijv. 2023" min="1900" max="2100">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Kabinet <span class="form-hint-inline">(bij regeerakkoord)</span></label>
+                <select name="cabinet_id" class="form-select">
+                    <option value="">— Geen —</option>
                     {% for cab in cabinets %}
                     <option value="{{ cab.id }}">{{ cab.name }}</option>
                     {% endfor %}
                 </select>
-                {% if not cabinets %}<p class="form-hint"><a href="/admin/kabinetten/nieuw">Voeg eerst een kabinet toe →</a></p>{% endif %}
             </div>
             <div class="form-group">
                 <label class="form-label">Partij</label>
                 <select name="party_id" class="form-select">
-                    <option value="">Heel kabinet / coalitie</option>
+                    <option value="">— Geen (hele coalitie) —</option>
                     {% for party in parties %}
-                    <option value="{{ party.id }}">{{ party.name }} ({{ party.abbreviation }})</option>
+                    <option value="{{ party.id }}">{{ party.abbreviation }} – {{ party.name }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -40,11 +53,10 @@
         <div class="form-row">
             <div class="form-group">
                 <label class="form-label">Categorie</label>
-                <select name="category" class="form-select">
-                    {% for cat in categories %}
-                    <option value="{{ cat.name }}">{{ cat.value }}</option>
-                    {% endfor %}
-                </select>
+                <input type="text" name="category" class="form-input" list="categoryList" placeholder="bijv. Zorg" value="Overig">
+                <datalist id="categoryList">
+                    {% for cat in categories %}<option value="{{ cat }}">{% endfor %}
+                </datalist>
             </div>
             <div class="form-group">
                 <label class="form-label">Status</label>
@@ -62,8 +74,8 @@
         </div>
 
         <div class="form-group">
-            <label class="form-label">Originele tekst uit akkoord</label>
-            <textarea name="source_text" class="form-textarea" rows="3" placeholder="Exacte citaat uit het regeerakkoord (optioneel)"></textarea>
+            <label class="form-label">Originele tekst uit bron</label>
+            <textarea name="source_text" class="form-textarea" rows="3" placeholder="Exact citaat uit regeerakkoord of verkiezingsprogramma (optioneel)"></textarea>
         </div>
 
         <div class="form-actions">

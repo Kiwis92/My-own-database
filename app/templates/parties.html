@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ _('parties.title') }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>{{ _('parties.title') }}</h1>
+        <p>{{ _('parties.subtitle') }}</p>
+    </div>
+</div>
+
+<div class="container page-body">
+    <div class="parties-grid">
+        {% for item in party_stats %}
+        <a href="/partij/{{ item.party.id }}" class="party-card {% if not item.party.active %}party-inactive{% endif %}" style="border-top: 4px solid {{ item.party.color }}">
+            <div class="party-card-header">
+                <span class="party-abbr" style="color: {{ item.party.color }}">{{ item.party.abbreviation }}</span>
+                {% if item.party.active and item.party.current_seats %}
+                <span class="party-seats-badge">{{ item.party.current_seats }} {{ _('parties.seats') }}</span>
+                {% elif not item.party.active %}
+                <span class="party-inactive-badge">{{ _('parties.inactive') }}</span>
+                {% endif %}
+            </div>
+            <h3 class="party-name">{{ item.party.name }}</h3>
+            {% if item.party.ideology %}<p class="party-ideology">{{ item.party.ideology }}</p>{% endif %}
+
+            {% if item.total > 0 %}
+            <div class="party-promise-stats">
+                <div class="promise-bar">
+                    <div class="bar-seg bar-kept" style="width: {{ (item.kept / item.total * 100) | round }}%"></div>
+                    <div class="bar-seg bar-partly" style="width: {{ (item.partly / item.total * 100) | round }}%"></div>
+                    <div class="bar-seg bar-broken" style="width: {{ (item.broken / item.total * 100) | round }}%"></div>
+                </div>
+                <div class="party-promise-numbers">
+                    <span>{{ item.total }} {{ _('parties.promises_tracked') }}</span>
+                    <span class="pct-kept">{{ item.pct }}% {{ _('parties.kept') }}</span>
+                </div>
+            </div>
+            {% else %}
+            <p class="party-no-promises">{{ _('parties.no_promises') }}</p>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

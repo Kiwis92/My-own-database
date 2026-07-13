@@ -10,19 +10,37 @@
     {% endif %}
 
     <form method="post" action="{% if cabinet %}/admin/kabinetten/{{ cabinet.id }}/bewerk{% else %}/admin/kabinetten/nieuw{% endif %}">
-        <div class="form-group">
-            <label class="form-label">Naam kabinet *</label>
-            <input type="text" name="name" class="form-input" value="{{ cabinet.name if cabinet else '' }}" required placeholder="bijv. Kabinet-Schoof">
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Naam kabinet *</label>
+                <input type="text" name="name" class="form-input" value="{{ cabinet.name if cabinet else '' }}" required placeholder="bijv. Kabinet-Schoof">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Premier</label>
+                <input type="text" name="premier" class="form-input" value="{{ cabinet.premier if cabinet and cabinet.premier else '' }}" placeholder="bijv. Dick Schoof">
+            </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label class="form-label">Startjaar *</label>
-                <input type="number" name="year_start" class="form-input" value="{{ cabinet.year_start if cabinet else '' }}" required placeholder="bijv. 2024" min="1900" max="2100">
+                <label class="form-label">Startdatum</label>
+                <input type="date" name="start_date" class="form-input" value="{{ cabinet.start_date.isoformat() if cabinet and cabinet.start_date else '' }}">
             </div>
             <div class="form-group">
-                <label class="form-label">Eindjaar</label>
-                <input type="number" name="year_end" class="form-input" value="{{ cabinet.year_end if cabinet and cabinet.year_end else '' }}" placeholder="Leeg = huidig" min="1900" max="2100">
+                <label class="form-label">Einddatum <span class="form-hint-inline">(leeg = zittend)</span></label>
+                <input type="date" name="end_date" class="form-input" value="{{ cabinet.end_date.isoformat() if cabinet and cabinet.end_date else '' }}">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label class="checkbox-item">
+                    <input type="checkbox" name="fell" value="1" {% if cabinet and cabinet.fell %}checked{% endif %}> Kabinet is gevallen
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Reden van val</label>
+                <input type="text" name="fall_reason" class="form-input" value="{{ cabinet.fall_reason if cabinet and cabinet.fall_reason else '' }}" placeholder="bijv. Crisis over asielbeleid">
             </div>
         </div>
 
@@ -32,9 +50,8 @@
                 {% for party in parties %}
                 <label class="checkbox-item">
                     <input type="checkbox" name="party_ids" value="{{ party.id }}"
-                        {% if cabinet and party.id in selected_party_ids %}checked{% endif %}>
+                        {% if party.id in selected_party_ids %}checked{% endif %}>
                     <span class="party-chip" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">{{ party.abbreviation }}</span>
-                    {{ party.name }}
                 </label>
                 {% endfor %}
             </div>
@@ -45,7 +62,7 @@
 
         <div class="form-group">
             <label class="form-label">Omschrijving</label>
-            <textarea name="description" class="form-textarea" rows="4" placeholder="Korte omschrijving van het kabinet en haar agenda">{{ cabinet.description if cabinet else '' }}</textarea>
+            <textarea name="description" class="form-textarea" rows="4" placeholder="Korte omschrijving van het kabinet en haar agenda">{{ cabinet.description if cabinet and cabinet.description else '' }}</textarea>
         </div>
 
         <div class="form-group">

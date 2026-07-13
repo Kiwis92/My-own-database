@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="{{ locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PoliTrack{% endblock %} – Politieke Beloftes Tracker</title>
-    <meta name="description" content="PoliTrack monitort politieke beloftes en volgt of kabinetten hun beloftes nakomen.">
+    <title>{% block title %}PoliTrack{% endblock %} – {{ _('site.tagline') }}</title>
+    <meta name="description" content="{{ _('site.description') }}">
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 <body>
     <nav class="navbar">
@@ -17,10 +16,16 @@
             </a>
             <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">Home</a></li>
-                <li><a href="/beloftes" class="nav-link {% if '/beloftes' in request.url.path %}active{% endif %}">Beloftes</a></li>
-                <li><a href="/kabinetten" class="nav-link {% if '/kabinetten' in request.url.path %}active{% endif %}">Kabinetten</a></li>
-                <li><a href="/admin" class="nav-link nav-link-admin">Beheer</a></li>
+                <li><a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">{{ _('nav.home') }}</a></li>
+                <li><a href="/beloftes" class="nav-link {% if '/beloftes' in request.url.path or '/belofte/' in request.url.path %}active{% endif %}">{{ _('nav.promises') }}</a></li>
+                <li><a href="/partijen" class="nav-link {% if '/partij' in request.url.path %}active{% endif %}">{{ _('nav.parties') }}</a></li>
+                <li><a href="/kabinetten" class="nav-link {% if '/kabinet' in request.url.path %}active{% endif %}">{{ _('nav.cabinets') }}</a></li>
+                <li class="lang-switcher">
+                    {% for lang in ['nl','en','de','fr','es'] %}
+                    <a href="?lang={{ lang }}" class="lang-link {% if locale == lang %}active{% endif %}">{{ lang|upper }}</a>
+                    {% endfor %}
+                </li>
+                <li><a href="/admin" class="nav-link nav-link-admin">{{ _('nav.admin') }}</a></li>
             </ul>
         </div>
     </nav>
@@ -34,25 +39,26 @@
             <div class="footer-brand">
                 <span class="brand-icon">⚖</span>
                 <strong>PoliTrack</strong>
-                <p>Een onafhankelijk platform voor politieke transparantie.</p>
+                <p>{{ _('footer.about') }}</p>
             </div>
             <div class="footer-links">
-                <h4>Navigatie</h4>
+                <h4>{{ _('footer.nav') }}</h4>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/beloftes">Alle beloftes</a></li>
-                    <li><a href="/kabinetten">Kabinetten</a></li>
+                    <li><a href="/">{{ _('nav.home') }}</a></li>
+                    <li><a href="/beloftes">{{ _('footer.all_promises') }}</a></li>
+                    <li><a href="/partijen">{{ _('nav.parties') }}</a></li>
+                    <li><a href="/kabinetten">{{ _('nav.cabinets') }}</a></li>
                 </ul>
             </div>
             <div class="footer-donate">
-                <h4>Steun ons werk</h4>
-                <p>PoliTrack is een onafhankelijk initiatief zonder winstoogmerk.</p>
-                <a href="#" class="btn btn-outline">Doneer</a>
+                <h4>{{ _('footer.support.title') }}</h4>
+                <p>{{ _('footer.support.text') }}</p>
+                <a href="#" class="btn btn-outline">{{ _('footer.donate') }}</a>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2024 PoliTrack – Democratie verdient transparantie</p>
+                <p>&copy; PoliTrack – {{ _('footer.tagline') }}</p>
             </div>
         </div>
     </footer>

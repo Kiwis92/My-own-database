@@ -339,3 +339,126 @@ img { max-width: 100%; }
 }
 
 .inline-form { display: inline; }
+
+/* ===== V2: NIEUWE STATUS & COMPONENTEN ===== */
+:root {
+    --status-deels_waargemaakt: #14b8a6;
+    --status-deels_waargemaakt-bg: #f0fdfa;
+}
+.status-deels_waargemaakt { background: var(--status-deels_waargemaakt-bg); color: var(--status-deels_waargemaakt); }
+.stat-teal .stat-number { color: var(--status-deels_waargemaakt); }
+
+/* Language switcher */
+.lang-switcher { display: flex; align-items: center; gap: .125rem; padding: 0 .5rem; }
+.lang-link { font-size: .6875rem; font-weight: 700; padding: .25rem .375rem; border-radius: 4px; color: var(--color-text-muted); }
+.lang-link:hover { background: var(--color-bg); text-decoration: none; }
+.lang-link.active { background: var(--color-primary); color: #fff; }
+
+/* Promise source tag */
+.promise-source-tag { font-size: .6875rem; font-weight: 600; color: var(--color-text-muted); background: var(--color-bg); border: 1px dashed var(--color-border); border-radius: 999px; padding: .2rem .6rem; margin-left: auto; }
+
+/* Parties strip (homepage) */
+.parties-strip-section { padding: 3rem 0 1rem; }
+.parties-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .75rem; }
+.party-strip-card { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: .875rem .75rem; display: flex; flex-direction: column; gap: .25rem; align-items: center; text-decoration: none; transition: all .15s; }
+.party-strip-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); text-decoration: none; }
+.party-strip-abbr { font-weight: 800; font-size: 1.05rem; }
+.party-strip-seats { font-size: .75rem; color: var(--color-text-muted); }
+
+/* Parties page */
+.parties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+.party-card { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; text-decoration: none; color: var(--color-text); transition: all .2s; display: block; }
+.party-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); text-decoration: none; }
+.party-inactive { opacity: .65; }
+.party-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.party-abbr { font-size: 1.375rem; font-weight: 800; }
+.party-seats-badge { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 999px; padding: .2rem .6rem; font-size: .75rem; font-weight: 600; color: var(--color-text-muted); }
+.party-inactive-badge { background: var(--color-bg); border-radius: 999px; padding: .2rem .6rem; font-size: .75rem; color: var(--color-text-muted); }
+.party-name { font-size: .9375rem; font-weight: 600; margin-bottom: .25rem; }
+.party-ideology { font-size: .8125rem; color: var(--color-text-muted); margin-bottom: .75rem; }
+.party-promise-stats { margin-top: .75rem; }
+.promise-bar { height: 8px; background: var(--color-bg); border-radius: 999px; overflow: hidden; display: flex; margin-bottom: .5rem; }
+.bar-seg { height: 100%; }
+.bar-kept { background: var(--status-waargemaakt); }
+.bar-partly { background: var(--status-deels_waargemaakt); }
+.bar-broken { background: var(--status-gebroken); }
+.party-promise-numbers { display: flex; justify-content: space-between; font-size: .8125rem; color: var(--color-text-muted); }
+.pct-kept { font-weight: 700; color: var(--status-waargemaakt); }
+.party-no-promises { font-size: .8125rem; color: var(--color-text-muted); margin-top: .75rem; }
+
+/* Party detail */
+.party-hero { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; margin-bottom: 2rem; }
+.party-hero-main h1 { font-size: 2.25rem; font-weight: 800; line-height: 1; }
+.party-fullname { font-size: 1.125rem; font-weight: 600; color: var(--color-text-muted); margin: .375rem 0 .75rem; }
+.party-about { font-size: .9375rem; color: var(--color-text); line-height: 1.6; max-width: 640px; margin-bottom: 1rem; }
+.party-facts { display: flex; flex-wrap: wrap; gap: .75rem; }
+.fact { font-size: .8125rem; color: var(--color-text-muted); background: var(--color-bg); border-radius: 999px; padding: .3rem .75rem; }
+.party-hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; align-content: start; }
+.hero-stat { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: .75rem 1rem; text-align: center; min-width: 90px; }
+.hs-num { display: block; font-size: 1.5rem; font-weight: 800; }
+.hs-label { font-size: .6875rem; color: var(--color-text-muted); font-weight: 600; }
+.hs-green .hs-num { color: var(--status-waargemaakt); }
+.hs-teal .hs-num { color: var(--status-deels_waargemaakt); }
+.hs-red .hs-num { color: var(--status-gebroken); }
+.party-layout { display: grid; grid-template-columns: 1fr 300px; gap: 2rem; align-items: start; }
+.party-section { margin-bottom: 2.5rem; }
+.party-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--color-border); }
+.year-group { margin-bottom: 1.5rem; }
+.year-heading { font-size: 1rem; font-weight: 700; margin-bottom: .625rem; display: flex; align-items: center; gap: .5rem; }
+.year-count { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 999px; padding: .1rem .55rem; font-size: .75rem; color: var(--color-text-muted); }
+.year-promises { display: flex; flex-direction: column; gap: .375rem; }
+.promise-row { display: flex; align-items: center; gap: .75rem; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: .625rem .875rem; text-decoration: none; color: var(--color-text); transition: all .15s; }
+.promise-row:hover { border-color: var(--color-primary); text-decoration: none; }
+.promise-row-title { flex: 1; font-size: .875rem; font-weight: 500; }
+.promise-row-cat { font-size: .75rem; color: var(--color-text-muted); white-space: nowrap; }
+.muted { color: var(--color-text-muted); }
+
+/* Votes table */
+.votes-table-wrap { overflow-x: auto; }
+.votes-table { width: 100%; border-collapse: collapse; }
+.votes-table td { padding: .75rem .625rem; border-bottom: 1px solid var(--color-border); font-size: .875rem; vertical-align: top; }
+.vote-year { color: var(--color-text-muted); white-space: nowrap; width: 50px; }
+.vote-summary { font-size: .8125rem; color: var(--color-text-muted); }
+.vote-choice { width: 110px; text-align: right; }
+.vote-badge { display: inline-block; padding: .2rem .6rem; border-radius: 999px; font-size: .75rem; font-weight: 700; }
+.vote-voor { background: var(--status-waargemaakt-bg); color: var(--status-waargemaakt); }
+.vote-tegen { background: var(--status-gebroken-bg); color: var(--status-gebroken); }
+.vote-onthouden { background: var(--status-geparkeerd-bg); color: var(--status-geparkeerd); }
+.vote-afwezig { background: var(--color-bg); color: var(--color-text-muted); }
+
+/* Sidebar: cabinet list, seat history */
+.party-sidebar .sidebar-card { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+.party-sidebar h3 { font-weight: 700; font-size: .9375rem; margin-bottom: .875rem; }
+.cabinet-list { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+.cabinet-list li { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; font-size: .875rem; }
+.cabinet-years { color: var(--color-text-muted); font-size: .75rem; }
+.fell-badge { background: var(--status-gebroken-bg); color: var(--status-gebroken); border-radius: 999px; padding: .1rem .5rem; font-size: .6875rem; font-weight: 700; }
+.seat-history { display: flex; flex-direction: column; gap: .45rem; }
+.seat-row { display: flex; align-items: center; gap: .625rem; }
+.seat-year { font-size: .75rem; color: var(--color-text-muted); width: 34px; }
+.seat-bar-track { flex: 1; height: 10px; background: var(--color-bg); border-radius: 999px; overflow: hidden; }
+.seat-bar { height: 100%; border-radius: 999px; }
+.seat-num { font-size: .75rem; font-weight: 700; width: 30px; text-align: right; }
+
+/* Cabinet badges & extras */
+.cabinet-card-top { display: flex; align-items: center; justify-content: space-between; }
+.cab-badge { border-radius: 999px; padding: .15rem .6rem; font-size: .6875rem; font-weight: 700; }
+.cab-current { background: var(--status-waargemaakt-bg); color: var(--status-waargemaakt); }
+.cab-fell { background: var(--status-gebroken-bg); color: var(--status-gebroken); }
+.cabinet-premier { font-size: .875rem; color: var(--color-text-muted); margin-bottom: .5rem; }
+.cabinet-premier-lg { font-size: 1rem; color: var(--color-text-muted); margin-bottom: .75rem; }
+.cabinet-fall-reason { font-size: .8125rem; color: var(--status-gebroken); background: var(--status-gebroken-bg); border-radius: var(--radius); padding: .5rem .75rem; margin-top: .75rem; }
+.fall-reason-box { background: var(--status-gebroken-bg); border: 1px solid #fca5a5; border-radius: var(--radius); padding: .875rem 1rem; font-size: .875rem; margin: .75rem 0 1rem; color: var(--color-text); }
+.cabinet-hero-side { display: flex; flex-direction: column; gap: 1rem; }
+.highlights-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.highlights-list li { font-size: .8125rem; padding-left: 1.25rem; position: relative; }
+.highlights-list li::before { content: "★"; position: absolute; left: 0; color: var(--color-primary); }
+
+/* Admin extras */
+.form-hint-inline { font-weight: 400; font-size: .75rem; color: var(--color-text-muted); }
+.delete-form { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--color-border); display: block; }
+
+@media (max-width: 900px) {
+    .party-hero { grid-template-columns: 1fr; }
+    .party-layout { grid-template-columns: 1fr; }
+}

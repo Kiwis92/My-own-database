@@ -13,6 +13,12 @@
                 <option value="{{ cab.id }}" {% if filters.cabinet_id == cab.id %}selected{% endif %}>{{ cab.name }}</option>
                 {% endfor %}
             </select>
+            <select name="party_id" class="filter-select">
+                <option value="">Alle partijen</option>
+                {% for party in parties %}
+                <option value="{{ party.id }}" {% if filters.party_id == party.id %}selected{% endif %}>{{ party.abbreviation }}</option>
+                {% endfor %}
+            </select>
             <select name="status" class="filter-select">
                 <option value="">Alle statussen</option>
                 {% for s in statuses %}
@@ -32,10 +38,10 @@
                 <tr>
                     <th>#</th>
                     <th>Belofte</th>
-                    <th>Kabinet</th>
-                    <th>Partij</th>
+                    <th>Soort</th>
+                    <th>Kabinet / Partij</th>
                     <th>Status</th>
-                    <th>Cat.</th>
+                    <th>Categorie</th>
                     <th>Bronnen</th>
                     <th>Acties</th>
                 </tr>
@@ -45,10 +51,14 @@
                 <tr>
                     <td class="id-cell">{{ p.id }}</td>
                     <td class="title-cell"><a href="/admin/beloftes/{{ p.id }}">{{ p.title[:70] }}{% if p.title|length > 70 %}...{% endif %}</a></td>
-                    <td>{{ p.cabinet.name }}</td>
-                    <td>{% if p.party %}<span class="party-chip" style="background-color: {{ p.party.color }}20; color: {{ p.party.color }}; border: 1px solid {{ p.party.color }}40">{{ p.party.abbreviation }}</span>{% else %}–{% endif %}</td>
+                    <td>{{ p.source_kind.value }}{% if p.election_year %} {{ p.election_year }}{% endif %}</td>
+                    <td>
+                        {% if p.cabinet %}{{ p.cabinet.name }}{% endif %}
+                        {% if p.party %}<span class="party-chip" style="background-color: {{ p.party.color }}20; color: {{ p.party.color }}; border: 1px solid {{ p.party.color }}40">{{ p.party.abbreviation }}</span>{% endif %}
+                        {% if not p.cabinet and not p.party %}–{% endif %}
+                    </td>
                     <td><span class="status-badge status-{{ p.status.name }}">{{ p.status.value }}</span></td>
-                    <td>{{ p.category.value }}</td>
+                    <td>{{ p.category }}</td>
                     <td>{{ p.evidence|length }}</td>
                     <td class="actions-cell">
                         <a href="/admin/beloftes/{{ p.id }}" class="btn btn-ghost btn-sm">Bewerken</a>

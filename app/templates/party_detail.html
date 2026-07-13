@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}{{ party.abbreviation }}{% endblock %}
+
+{% block content %}
+<div class="container page-body">
+    <div class="breadcrumb">
+        <a href="/">{{ _('nav.home') }}</a> / <a href="/partijen">{{ _('parties.title') }}</a> / <span>{{ party.abbreviation }}</span>
+    </div>
+
+    <!-- Party hero -->
+    <div class="party-hero" style="border-left: 6px solid {{ party.color }}">
+        <div class="party-hero-main">
+            <h1 style="color: {{ party.color }}">{{ party.abbreviation }}</h1>
+            <h2 class="party-fullname">{{ party.name }}</h2>
+            {% if party.description %}<p class="party-about">{{ party.description }}</p>{% endif %}
+            <div class="party-facts">
+                {% if party.ideology %}<span class="fact"><strong>{{ _('party.ideology') }}:</strong> {{ party.ideology }}</span>{% endif %}
+                {% if party.founded_year %}<span class="fact"><strong>{{ _('party.founded') }}:</strong> {{ party.founded_year }}</span>{% endif %}
+                {% if party.active and party.current_seats is not none %}<span class="fact"><strong>{{ _('party.current_seats') }}:</strong> {{ party.current_seats }}</span>{% endif %}
+                {% if not party.active %}<span class="fact party-inactive-badge">{{ _('parties.inactive') }}</span>{% endif %}
+            </div>
+        </div>
+        {% if stats.total > 0 %}
+        <div class="party-hero-stats">
+            <div class="hero-stat"><span class="hs-num">{{ stats.total }}</span><span class="hs-label">{{ _('home.stats.total') }}</span></div>
+            <div class="hero-stat hs-green"><span class="hs-num">{{ stats.kept }}</span><span class="hs-label">{{ _('status.waargemaakt') }}</span></div>
+            <div class="hero-stat hs-teal"><span class="hs-num">{{ stats.partly }}</span><span class="hs-label">{{ _('status.deels_waargemaakt') }}</span></div>
+            <div class="hero-stat hs-red"><span class="hs-num">{{ stats.broken }}</span><span class="hs-label">{{ _('status.gebroken') }}</span></div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="party-layout">
+        <div class="party-main">
+            <!-- Beloftes per verkiezingsjaar -->
+            <section class="party-section">
+                <h2>{{ _('party.promises.title') }}</h2>
+                {% if promises_by_year %}
+                    {% for year, promises in promises_by_year.items() %}
+                    <div class="year-group">
+                        <h3 class="year-heading">
+                            {% if year %}{{ _('party.program') }} {{ year }}{% else %}{{ _('promises.title') }}{% endif %}
+                            <span class="year-count">{{ promises|length }}</span>
+                        </h3>
+                        <div class="year-promises">
+                            {% for promise in promises %}
+                            <a href="/belofte/{{ promise.id }}" class="promise-row">
+                                <span class="status-badge status-{{ promise.status.name }}">{{ _('status.' + promise.status.name) }}</span>
+                                <span class="promise-row-title">{{ promise.title }}</span>
+                                <span class="promise-row-cat">{{ promise.category }}</span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <p class="muted">{{ _('parties.no_promises') }}</p>
+                {% endif %}
+            </section>
+
+            <!-- Stemgedrag -->
+            {% if votes %}
+            <section class="party-section">
+                <h2>{{ _('party.votes.title') }}</h2>
+                <div class="votes-table-wrap">
+                    <table class="votes-table">
+                        <tbody>
+                            {% for vote, motion in votes %}
+                            <tr>
+                                <td class="vote-year">{{ motion.year }}</td>
+                                <td class="vote-law"><strong>{{ motion.title }}</strong>
+                                    {% if motion.summary %}<br><span class="vote-summary">{{ motion.summary }}</span>{% endif %}
+                                </td>
+                                <td class="vote-choice"><span class="vote-badge vote-{{ vote.vote.name }}">{{ _('vote.' + vote.vote.name) }}</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            {% endif %}
+        </div>
+
+        <aside class="party-sidebar">
+            <!-- Kabinetsdeelname -->
+            {% if cabinets %}
+            <div class="sidebar-card">
+                <h3>{{ _('party.cabinets.title') }}</h3>
+                <ul class="cabinet-list">
+                    {% for cab in cabinets %}
+                    <li>
+                        <a href="/kabinet/{{ cab.id }}">{{ cab.name }}</a>
+                        <span class="cabinet-years">{{ cab.year_start }}–{{ cab.year_end or _('common.until_now') }}</span>
+                        {% if cab.fell %}<span class="fell-badge">{{ _('cabinets.fell') }}</span>{% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- Zetelhistorie -->
+            {% if seat_history %}
+            <div class="sidebar-card">
+                <h3>{{ _('party.seats.title') }}</h3>
+                <div class="seat-history">
+                    {% for row in seat_history %}
+                    <div class="seat-row">
+                        <span class="seat-year">{{ row.year }}</span>
+                        <div class="seat-bar-track">
+                            <div class="seat-bar" style="width: {{ row.pct }}%; background: {{ party.color }}"></div>
+                        </div>
+                        <span class="seat-num">{{ row.seats }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Aanwezigheid -->
+            {% if attendance %}
+            <div class="sidebar-card">
+                <h3>{{ _('party.attendance.title') }}</h3>
+                <div class="seat-history">
+                    {% for a in attendance %}
+                    <div class="seat-row">
+                        <span class="seat-year">{{ a.year }}</span>
+                        <div class="seat-bar-track">
+                            <div class="seat-bar" style="width: {{ a.percentage }}%; background: {{ party.color }}"></div>
+                        </div>
+                        <span class="seat-num">{{ a.percentage | round | int }}%</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </aside>
+    </div>
+</div>
+{% endblock %}
