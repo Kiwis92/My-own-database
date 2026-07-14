@@ -6,7 +6,11 @@
   "nav.promises": "Beloftes",
   "nav.parties": "Partijen",
   "nav.cabinets": "Kabinetten",
+  "nav.legal": "Juridisch",
   "nav.admin": "Beheer",
+
+  "legal.version": "Versie",
+  "legal.updated": "Laatst bijgewerkt",
 
   "status.beloofd": "Beloofd",
   "status.in_uitvoering": "In Uitvoering",

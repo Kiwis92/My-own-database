@@ -12,6 +12,7 @@ from ..models import (
     PartyAttendance, PromiseStatus, PromiseSource,
 )
 from ..i18n import get_locale, translate
+from ..content import load_document
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -189,6 +190,14 @@ def party_detail(request: Request, party_id: int, db: Session = Depends(get_db))
                   seat_history=seat_history, votes=votes, attendance=attendance,
                   stats={"total": total, "kept": kept, "partly": partly, "broken": broken,
                          "pct": round(kept / total * 100) if total else None})
+
+
+@router.get("/juridisch", response_class=HTMLResponse)
+def juridisch(request: Request):
+    doc = load_document("juridisch/algemene-voorwaarden.md")
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document niet gevonden")
+    return render("juridisch.html", request, doc=doc)
 
 
 @router.get("/kabinetten", response_class=HTMLResponse)

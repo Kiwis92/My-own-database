@@ -462,3 +462,18 @@ img { max-width: 100%; }
     .party-hero { grid-template-columns: 1fr; }
     .party-layout { grid-template-columns: 1fr; }
 }
+
+/* ===== PROSE (juridische / redactionele documenten) ===== */
+.prose { max-width: 820px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2.5rem 3rem; font-size: .9375rem; line-height: 1.75; color: var(--color-text); }
+.prose h1 { font-size: 1.625rem; font-weight: 800; margin: 0 0 1rem; line-height: 1.25; }
+.prose h2 { font-size: 1.25rem; font-weight: 700; margin: 2rem 0 .75rem; padding-bottom: .4rem; border-bottom: 1px solid var(--color-border); }
+.prose h3 { font-size: 1.05rem; font-weight: 700; margin: 1.5rem 0 .5rem; }
+.prose h4 { font-size: .95rem; font-weight: 700; margin: 1.25rem 0 .5rem; }
+.prose p { margin: 0 0 .875rem; }
+.prose ul, .prose ol { margin: 0 0 .875rem; padding-left: 1.5rem; }
+.prose li { margin-bottom: .35rem; }
+.prose strong { font-weight: 700; }
+.prose a { color: var(--color-primary); text-decoration: underline; }
+.prose hr { border: none; border-top: 1px solid var(--color-border); margin: 2rem 0; }
+.prose code { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 4px; padding: .1rem .35rem; font-size: .875em; }
+@media (max-width: 640px) { .prose { padding: 1.5rem 1.25rem; } }

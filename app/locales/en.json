@@ -6,7 +6,11 @@
   "nav.promises": "Promises",
   "nav.parties": "Parties",
   "nav.cabinets": "Cabinets",
+  "nav.legal": "Legal",
   "nav.admin": "Admin",
+
+  "legal.version": "Version",
+  "legal.updated": "Last updated",
 
   "status.beloofd": "Promised",
   "status.in_uitvoering": "In Progress",
