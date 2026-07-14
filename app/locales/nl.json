@@ -7,10 +7,12 @@
   "nav.parties": "Partijen",
   "nav.cabinets": "Kabinetten",
   "nav.legal": "Juridisch",
+  "nav.privacy": "Privacy",
   "nav.admin": "Beheer",
 
   "legal.version": "Versie",
   "legal.updated": "Laatst bijgewerkt",
+  "legal.see_also": "Zie ook",
 
   "status.beloofd": "Beloofd",
   "status.in_uitvoering": "In Uitvoering",

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}{{ doc.title }}{% endblock %}
+{% block title %}{{ _(title_key) }}{% endblock %}
 
 {% block content %}
 <div class="page-header">
     <div class="container">
-        <h1>{{ _('nav.legal') }}</h1>
+        <h1>{{ _(title_key) }}</h1>
         {% if doc.meta.versie or doc.meta.laatst_bijgewerkt %}
         <p>
             {% if doc.meta.versie %}{{ _('legal.version') }} {{ doc.meta.versie }}{% endif %}
@@ -16,8 +16,18 @@
 
 <div class="container page-body">
     <div class="breadcrumb">
-        <a href="/">{{ _('nav.home') }}</a> / <span>{{ _('nav.legal') }}</span>
+        <a href="/">{{ _('nav.home') }}</a> / <span>{{ _(title_key) }}</span>
     </div>
+
+    {% if related %}
+    <div class="legal-related">
+        <span class="legal-related-label">{{ _('legal.see_also') }}:</span>
+        {% for item in related %}
+        <a href="{{ item.url }}" class="legal-related-link">{{ _(item.label_key) }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <article class="prose">
         {{ doc.html | safe }}
     </article>

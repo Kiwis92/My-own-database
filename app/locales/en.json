@@ -7,10 +7,12 @@
   "nav.parties": "Parties",
   "nav.cabinets": "Cabinets",
   "nav.legal": "Legal",
+  "nav.privacy": "Privacy",
   "nav.admin": "Admin",
 
   "legal.version": "Version",
   "legal.updated": "Last updated",
+  "legal.see_also": "See also",
 
   "status.beloofd": "Promised",
   "status.in_uitvoering": "In Progress",

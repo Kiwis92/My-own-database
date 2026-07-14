@@ -197,7 +197,17 @@ def juridisch(request: Request):
     doc = load_document("juridisch/algemene-voorwaarden.md")
     if not doc:
         raise HTTPException(status_code=404, detail="Document niet gevonden")
-    return render("juridisch.html", request, doc=doc)
+    return render("legal_page.html", request, doc=doc, title_key="nav.legal",
+                  related=[{"url": "/privacy", "label_key": "nav.privacy"}])
+
+
+@router.get("/privacy", response_class=HTMLResponse)
+def privacy(request: Request):
+    doc = load_document("juridisch/privacyverklaring.md")
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document niet gevonden")
+    return render("legal_page.html", request, doc=doc, title_key="nav.privacy",
+                  related=[{"url": "/juridisch", "label_key": "nav.legal"}])
 
 
 @router.get("/kabinetten", response_class=HTMLResponse)
