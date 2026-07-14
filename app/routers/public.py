@@ -192,22 +192,39 @@ def party_detail(request: Request, party_id: int, db: Session = Depends(get_db))
                          "pct": round(kept / total * 100) if total else None})
 
 
-@router.get("/juridisch", response_class=HTMLResponse)
-def juridisch(request: Request):
-    doc = load_document("juridisch/algemene-voorwaarden.md")
+# Juridische documenten (markdown in content/juridisch/). Elke pagina toont
+# kruislinks naar de overige documenten in deze reeks.
+LEGAL_PAGES = [
+    {"url": "/juridisch", "label_key": "nav.legal", "file": "juridisch/algemene-voorwaarden.md"},
+    {"url": "/privacy", "label_key": "nav.privacy", "file": "juridisch/privacyverklaring.md"},
+    {"url": "/cookies", "label_key": "nav.cookies", "file": "juridisch/cookieverklaring.md"},
+]
+
+
+def render_legal(request: Request, url: str):
+    page = next((p for p in LEGAL_PAGES if p["url"] == url), None)
+    if not page:
+        raise HTTPException(status_code=404, detail="Document niet gevonden")
+    doc = load_document(page["file"])
     if not doc:
         raise HTTPException(status_code=404, detail="Document niet gevonden")
-    return render("legal_page.html", request, doc=doc, title_key="nav.legal",
-                  related=[{"url": "/privacy", "label_key": "nav.privacy"}])
+    related = [{"url": p["url"], "label_key": p["label_key"]} for p in LEGAL_PAGES if p["url"] != url]
+    return render("legal_page.html", request, doc=doc, title_key=page["label_key"], related=related)
+
+
+@router.get("/juridisch", response_class=HTMLResponse)
+def juridisch(request: Request):
+    return render_legal(request, "/juridisch")
 
 
 @router.get("/privacy", response_class=HTMLResponse)
 def privacy(request: Request):
-    doc = load_document("juridisch/privacyverklaring.md")
-    if not doc:
-        raise HTTPException(status_code=404, detail="Document niet gevonden")
-    return render("legal_page.html", request, doc=doc, title_key="nav.privacy",
-                  related=[{"url": "/juridisch", "label_key": "nav.legal"}])
+    return render_legal(request, "/privacy")
+
+
+@router.get("/cookies", response_class=HTMLResponse)
+def cookies(request: Request):
+    return render_legal(request, "/cookies")
 
 
 @router.get("/kabinetten", response_class=HTMLResponse)
