@@ -28,24 +28,39 @@ krijgt een status: **Beloofd, In Uitvoering, Waargemaakt, Gebroken, Geparkeerd**
 ## Huidige stand van de code (deze repo: `Kiwis92/My-own-database`)
 Branch: `claude/build-politrack-app-yFM7H`
 
-Er staat een werkende **MVP** (bewust simpel, Nederland-only, handmatig CMS):
-- **Stack:** FastAPI + SQLite + SQLAlchemy + Jinja2 templates.
-- **Publieke site:** homepage met statistieken, filterbare beloftes (kabinet/partij/status/
-  categorie), kabinetten met voortgangsbalk, detailpagina per belofte met bewijsbronnen.
-- **Admin-CMS:** login (wachtwoord via `.env`), CRUD voor partijen/kabinetten/beloftes/bewijs.
-- **Datamodel:** `Party`, `Cabinet`, `Promise` (5 statussen, 13 categorieën), `Evidence`.
-- **Seed data:** 27 echte beloftes van Kabinet-Schoof. Draaien: `uvicorn app.main:app --reload`.
+De app is doorontwikkeld van NL-MVP naar de **architectuur uit de brief**:
+- **Stack:** FastAPI + SQLite + SQLAlchemy + Jinja2. Start: `python import_data.py --reset`
+  daarna `uvicorn app.main:app --reload`. Tests: `python tests/test_ingestion_nl.py`.
+- **Universeel multi-country schema** (`app/models.py`): `Country` als wortel;
+  `Party`, `Election`+`SeatResult`, `Cabinet` (premier/datums/valreden/hoogtepunten),
+  `Promise` (source_kind regeerakkoord|verkiezingsprogramma, election_year,
+  6 statussen incl. *Deels Waargemaakt*, vrije categorie-strings), `Motion`+`VoteRecord`
+  (universeel stemgedrag, roll-call-ready), `PromiseMatch` (voor AI-matching, nog leeg),
+  `Evidence`, `PartyFinance`, `PartyAttendance`.
+- **Ingestie-architectuur** (`app/ingestion/`): `CountryAdapter`-interface (base.py),
+  Tweede Kamer OData-adapter (nl_tweede_kamer.py), loader met partij-aliassen en
+  idempotentie op (country, external_id), CLI: `python -m app.ingestion.run nl
+  [--fixture]`. 9 offline tests op een echte-structuur fixture.
+- **i18n vanaf dag één** (`app/i18n.py` + `app/locales/*.json`): NL/EN volledig,
+  DE/FR/ES basis; keuze via `?lang=`, onthouden in cookie; fallback locale→en→nl.
+- **Publieke site:** partijdashboard `/partij/{id}` (beloftes per verkiezingsjaar,
+  stemgedrag, kabinetsdeelname, zetelhistorie, aanwezigheid), kabinetsdashboard,
+  filterbare beloftes, homepage met statistieken.
+- **Admin-CMS:** CRUD voor alles, incl. soort belofte/verkiezingsjaar/valreden.
 
 ⚠️ **Bekende blocker:** deze sessie kan niet naar `My-own-database` pushen (403 — alleen
 leesrechten voor de sessie-integratie). Lezen/fetch werkt wel. Push moet door de eigenaar
 zelf (bv. via GitHub Desktop) of nadat de integratie schrijfrechten krijgt op github.com.
+Ook uitgaand netwerkverkeer naar externe API's (bv. gegevensmagazijn.tweedekamer.nl) is
+in deze omgeving geblokkeerd — gebruik `--fixture` voor offline demo's; live ingestie
+werkt op de machine van de eigenaar.
 
-## Belangrijke discrepantie: MVP vs. brief
-De brief beschrijft een **ambitieuzere internationale, geautomatiseerde** visie (AI-matching,
-meertalig, meerdere landen). De huidige code is de **handmatige NL-MVP** uit de oorspronkelijke
-blauwdruk. Bij vervolgwerk: stem met de gebruiker af of we de MVP doorontwikkelen richting de
-brief (i18n-laag, universeel multi-country schema, LLM-parsing, Tweede Kamer API-ingestie) of
-eerst de MVP afronden.
+## Volgende stappen richting de brief
+1. **AI-belofte-matching:** stemmingen/moties koppelen aan beloftes via LLM →
+   vullen van `promise_matches` (relatie steunt/weerspreekt + confidence + verificatie).
+2. **LLM-parsing van verkiezingsprogramma's** naar atomische beloftes.
+3. **Fase 2-adapters:** EU-Parlement (OAS3), Spanje (Congreso), Duitsland (DIP).
+4. Vertalingen DE/FR/ES compleet maken (native review conform brief).
 
 ## Consolidatie (besloten)
 **Deze repo (`My-own-database`) is de ene canonieke codebasis.** De repo `Kiwis92/PoliTrack`
