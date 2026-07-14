@@ -1,0 +1,80 @@
+{% extends "admin/base.html" %}
+{% block title %}Beloftes{% endblock %}
+{% block header_title %}Beloftes{% endblock %}
+{% block header_actions %}<a href="/admin/beloftes/nieuw" class="btn btn-primary">+ Belofte toevoegen</a>{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+    <div class="admin-filter-bar">
+        <form method="get" action="/admin/beloftes" class="admin-filter-form">
+            <select name="cabinet_id" class="filter-select">
+                <option value="">Alle kabinetten</option>
+                {% for cab in cabinets %}
+                <option value="{{ cab.id }}" {% if filters.cabinet_id == cab.id %}selected{% endif %}>{{ cab.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="party_id" class="filter-select">
+                <option value="">Alle partijen</option>
+                {% for party in parties %}
+                <option value="{{ party.id }}" {% if filters.party_id == party.id %}selected{% endif %}>{{ party.abbreviation }}</option>
+                {% endfor %}
+            </select>
+            <select name="status" class="filter-select">
+                <option value="">Alle statussen</option>
+                {% for s in statuses %}
+                <option value="{{ s.name }}" {% if filters.status == s.name %}selected{% endif %}>{{ s.value }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm">Filteren</button>
+            <a href="/admin/beloftes" class="btn btn-ghost btn-sm">Wissen</a>
+        </form>
+        <span class="result-count">{{ promises|length }} beloftes</span>
+    </div>
+
+    {% if promises %}
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Belofte</th>
+                    <th>Soort</th>
+                    <th>Kabinet / Partij</th>
+                    <th>Status</th>
+                    <th>Categorie</th>
+                    <th>Bronnen</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in promises %}
+                <tr>
+                    <td class="id-cell">{{ p.id }}</td>
+                    <td class="title-cell"><a href="/admin/beloftes/{{ p.id }}">{{ p.title[:70] }}{% if p.title|length > 70 %}...{% endif %}</a></td>
+                    <td>{{ p.source_kind.value }}{% if p.election_year %} {{ p.election_year }}{% endif %}</td>
+                    <td>
+                        {% if p.cabinet %}{{ p.cabinet.name }}{% endif %}
+                        {% if p.party %}<span class="party-chip" style="background-color: {{ p.party.color }}20; color: {{ p.party.color }}; border: 1px solid {{ p.party.color }}40">{{ p.party.abbreviation }}</span>{% endif %}
+                        {% if not p.cabinet and not p.party %}–{% endif %}
+                    </td>
+                    <td><span class="status-badge status-{{ p.status.name }}">{{ p.status.value }}</span></td>
+                    <td>{{ p.category }}</td>
+                    <td>{{ p.evidence|length }}</td>
+                    <td class="actions-cell">
+                        <a href="/admin/beloftes/{{ p.id }}" class="btn btn-ghost btn-sm">Bewerken</a>
+                        <form method="post" action="/admin/beloftes/{{ p.id }}/verwijder" class="inline-form" onsubmit="return confirm('Verwijder deze belofte?')">
+                            <button type="submit" class="btn btn-danger btn-sm">Verwijder</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="admin-empty">
+        <p>Geen beloftes gevonden. <a href="/admin/beloftes/nieuw">Voeg de eerste toe.</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

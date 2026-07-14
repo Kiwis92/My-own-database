@@ -1,0 +1,23 @@
+{
+  "site.tagline": "Suivi des promesses politiques",
+  "nav.home": "Accueil",
+  "nav.promises": "Promesses",
+  "nav.parties": "Partis",
+  "nav.cabinets": "Gouvernements",
+  "nav.legal": "Mentions légales",
+  "nav.privacy": "Confidentialité",
+  "nav.cookies": "Cookies",
+  "nav.admin": "Gestion",
+  "legal.see_also": "Voir aussi",
+  "status.beloofd": "Promis",
+  "status.in_uitvoering": "En cours",
+  "status.deels_waargemaakt": "Partiellement tenue",
+  "status.waargemaakt": "Tenue",
+  "status.gebroken": "Rompue",
+  "status.geparkeerd": "En suspens",
+  "vote.voor": "Pour",
+  "vote.tegen": "Contre",
+  "vote.onthouden": "Abstention",
+  "vote.afwezig": "Absent",
+  "common.until_now": "présent"
+}

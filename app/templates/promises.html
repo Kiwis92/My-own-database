@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}{{ _('promises.title') }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>{{ _('promises.title') }}</h1>
+        <p>{{ pagination.total }} {{ _('promises.found') }}</p>
+    </div>
+</div>
+
+<div class="container page-body">
+    <div class="layout-sidebar">
+        <!-- Filters -->
+        <aside class="filters-panel">
+            <h3 class="filters-title">{{ _('promises.filter') }}</h3>
+            <form method="get" action="/beloftes" id="filterForm">
+                <div class="filter-group">
+                    <label class="filter-label">{{ _('promises.search') }}</label>
+                    <input type="text" name="search" value="{{ filters.search or '' }}" placeholder="{{ _('promises.search.placeholder') }}" class="filter-input">
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">{{ _('promises.source') }}</label>
+                    <select name="source" class="filter-select">
+                        <option value="">{{ _('promises.source.all') }}</option>
+                        {% for s in sources %}
+                        <option value="{{ s.name }}" {% if filters.source == s.name %}selected{% endif %}>{{ _('source.' + s.name) }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">{{ _('promises.cabinet') }}</label>
+                    <select name="cabinet_id" class="filter-select">
+                        <option value="">{{ _('promises.cabinet.all') }}</option>
+                        {% for cab in cabinets %}
+                        <option value="{{ cab.id }}" {% if filters.cabinet_id == cab.id %}selected{% endif %}>{{ cab.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">{{ _('promises.party') }}</label>
+                    <select name="party_id" class="filter-select">
+                        <option value="">{{ _('promises.party.all') }}</option>
+                        {% for party in parties %}
+                        <option value="{{ party.id }}" {% if filters.party_id == party.id %}selected{% endif %}>{{ party.abbreviation }} – {{ party.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">{{ _('promises.status') }}</label>
+                    <div class="status-filters">
+                        <label class="status-filter-item">
+                            <input type="radio" name="status" value="" {% if not filters.status %}checked{% endif %}> {{ _('promises.status.all') }}
+                        </label>
+                        {% for s in statuses %}
+                        <label class="status-filter-item">
+                            <input type="radio" name="status" value="{{ s.name }}" {% if filters.status == s.name %}checked{% endif %}>
+                            <span class="status-badge status-{{ s.name }}">{{ _('status.' + s.name) }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">{{ _('promises.category') }}</label>
+                    <select name="category" class="filter-select">
+                        <option value="">{{ _('promises.category.all') }}</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat }}" {% if filters.category == cat %}selected{% endif %}>{{ cat }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">{{ _('promises.apply') }}</button>
+                <a href="/beloftes" class="btn btn-ghost btn-block">{{ _('promises.clear') }}</a>
+            </form>
+        </aside>
+
+        <!-- Promises list -->
+        <div class="promises-list">
+            {% if promises %}
+                {% for promise in promises %}
+                <a href="/belofte/{{ promise.id }}" class="promise-card">
+                    <div class="promise-card-header">
+                        <span class="status-badge status-{{ promise.status.name }}">{{ _('status.' + promise.status.name) }}</span>
+                        <span class="promise-category">{{ promise.category }}</span>
+                        <span class="promise-source-tag">{{ _('source.' + promise.source_kind.name) }}{% if promise.election_year %} {{ promise.election_year }}{% endif %}</span>
+                    </div>
+                    <h3 class="promise-title">{{ promise.title }}</h3>
+                    {% if promise.description %}
+                    <p class="promise-desc">{{ promise.description[:160] }}{% if promise.description|length > 160 %}...{% endif %}</p>
+                    {% endif %}
+                    <div class="promise-meta">
+                        {% if promise.cabinet %}
+                        <span class="meta-item">🏛 {{ promise.cabinet.name }}</span>
+                        {% endif %}
+                        {% if promise.party %}
+                        <span class="meta-item" style="color: {{ promise.party.color }}">● {{ promise.party.abbreviation }}</span>
+                        {% endif %}
+                        {% if promise.evidence %}
+                        <span class="meta-item">📎 {{ promise.evidence|length }} {{ _('promises.sources_count') }}</span>
+                        {% endif %}
+                    </div>
+                </a>
+                {% endfor %}
+
+                <!-- Pagination -->
+                {% if pagination.total_pages > 1 %}
+                <div class="pagination">
+                    {% if pagination.page > 1 %}
+                    <a href="?{% for k,v in filters.items() %}{% if v %}{{ k }}={{ v }}&{% endif %}{% endfor %}page={{ pagination.page - 1 }}" class="page-btn">← {{ _('promises.prev') }}</a>
+                    {% endif %}
+                    <span class="page-info">{{ _('promises.page', page=pagination.page, total=pagination.total_pages) }}</span>
+                    {% if pagination.page < pagination.total_pages %}
+                    <a href="?{% for k,v in filters.items() %}{% if v %}{{ k }}={{ v }}&{% endif %}{% endfor %}page={{ pagination.page + 1 }}" class="page-btn">{{ _('promises.next') }} →</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">🔍</div>
+                <h3>{{ _('promises.empty.title') }}</h3>
+                <p>{{ _('promises.empty.text') }}</p>
+                <a href="/beloftes" class="btn btn-ghost">{{ _('promises.clear') }}</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

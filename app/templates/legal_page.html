@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ _(title_key) }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>{{ _(title_key) }}</h1>
+        {% if doc.meta.versie or doc.meta.laatst_bijgewerkt %}
+        <p>
+            {% if doc.meta.versie %}{{ _('legal.version') }} {{ doc.meta.versie }}{% endif %}
+            {% if doc.meta.laatst_bijgewerkt %} · {{ _('legal.updated') }}: {{ doc.meta.laatst_bijgewerkt }}{% endif %}
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container page-body">
+    <div class="breadcrumb">
+        <a href="/">{{ _('nav.home') }}</a> / <span>{{ _(title_key) }}</span>
+    </div>
+
+    {% if related %}
+    <div class="legal-related">
+        <span class="legal-related-label">{{ _('legal.see_also') }}:</span>
+        {% for item in related %}
+        <a href="{{ item.url }}" class="legal-related-link">{{ _(item.label_key) }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <article class="prose">
+        {{ doc.html | safe }}
+    </article>
+</div>
+{% endblock %}

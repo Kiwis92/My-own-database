@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}{{ _('nav.home') }}{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <span class="hero-badge">{{ _('home.badge') }}</span>
+            <h1>{{ _('home.title.pre') }} <span class="highlight">{{ _('home.title.highlight') }}</span>{{ _('home.title.post') }}</h1>
+            <p class="hero-sub">{{ _('home.subtitle') }}</p>
+            <div class="hero-actions">
+                <a href="/beloftes" class="btn btn-primary btn-lg">{{ _('home.cta.promises') }}</a>
+                <a href="/partijen" class="btn btn-outline btn-lg">{{ _('home.cta.parties') }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+{% if stats.total > 0 %}
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">{{ stats.total }}</div>
+                <div class="stat-label">{{ _('home.stats.total') }}</div>
+            </div>
+            <div class="stat-card stat-green">
+                <div class="stat-number">{{ stats.fulfilled }}</div>
+                <div class="stat-label">{{ _('home.stats.fulfilled') }}</div>
+                <div class="stat-pct">{{ stats.pct_fulfilled }}%</div>
+            </div>
+            <div class="stat-card stat-teal">
+                <div class="stat-number">{{ stats.deels }}</div>
+                <div class="stat-label">{{ _('home.stats.partly') }}</div>
+            </div>
+            <div class="stat-card stat-yellow">
+                <div class="stat-number">{{ stats.in_progress }}</div>
+                <div class="stat-label">{{ _('home.stats.in_progress') }}</div>
+            </div>
+            <div class="stat-card stat-red">
+                <div class="stat-number">{{ stats.broken }}</div>
+                <div class="stat-label">{{ _('home.stats.broken') }}</div>
+            </div>
+            <div class="stat-card stat-blue">
+                <div class="stat-number">{{ stats.beloofd }}</div>
+                <div class="stat-label">{{ _('home.stats.promised') }}</div>
+            </div>
+            <div class="stat-card stat-gray">
+                <div class="stat-number">{{ stats.geparkeerd }}</div>
+                <div class="stat-label">{{ _('home.stats.parked') }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Partijen -->
+{% if parties %}
+<section class="parties-strip-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>{{ _('home.parties.title') }}</h2>
+            <a href="/partijen" class="btn btn-ghost">{{ _('home.parties.all') }} →</a>
+        </div>
+        <div class="parties-strip">
+            {% for party in parties %}
+            <a href="/partij/{{ party.id }}" class="party-strip-card" style="border-top: 4px solid {{ party.color }}">
+                <span class="party-strip-abbr" style="color: {{ party.color }}">{{ party.abbreviation }}</span>
+                <span class="party-strip-seats">{{ party.current_seats }} {{ _('parties.seats') }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Kabinetten -->
+{% if cabinets %}
+<section class="cabinets-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>{{ _('home.cabinets.title') }}</h2>
+            <a href="/kabinetten" class="btn btn-ghost">{{ _('home.cabinets.all') }} →</a>
+        </div>
+        <div class="cabinet-cards">
+            {% for cabinet in cabinets %}
+            <a href="/kabinet/{{ cabinet.id }}" class="cabinet-card">
+                <div class="cabinet-period">{{ cabinet.year_start }}{% if cabinet.year_end %} – {{ cabinet.year_end }}{% else %} – {{ _('common.until_now') }}{% endif %}</div>
+                <h3 class="cabinet-name">{{ cabinet.name }}</h3>
+                {% if cabinet.parties %}
+                <div class="cabinet-parties">
+                    {% for party in cabinet.parties %}
+                    <span class="party-chip" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">{{ party.abbreviation }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if cabinet.premier %}<p class="cabinet-desc">{{ _('party.premier') }}: {{ cabinet.premier }}</p>{% endif %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- How it works -->
+<section class="how-section">
+    <div class="container">
+        <h2 class="section-title">{{ _('home.how.title') }}</h2>
+        <div class="how-grid">
+            <div class="how-card">
+                <div class="how-icon">📋</div>
+                <h3>{{ _('home.how.1.title') }}</h3>
+                <p>{{ _('home.how.1.text') }}</p>
+            </div>
+            <div class="how-card">
+                <div class="how-icon">🔍</div>
+                <h3>{{ _('home.how.2.title') }}</h3>
+                <p>{{ _('home.how.2.text') }}</p>
+            </div>
+            <div class="how-card">
+                <div class="how-icon">📎</div>
+                <h3>{{ _('home.how.3.title') }}</h3>
+                <p>{{ _('home.how.3.text') }}</p>
+            </div>
+            <div class="how-card">
+                <div class="how-icon">📊</div>
+                <h3>{{ _('home.how.4.title') }}</h3>
+                <p>{{ _('home.how.4.text') }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

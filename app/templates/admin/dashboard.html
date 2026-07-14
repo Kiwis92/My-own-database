@@ -1,0 +1,121 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block header_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="admin-stats-grid">
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon">📋</div>
+        <div class="admin-stat-body">
+            <div class="admin-stat-num">{{ stats.total_promises }}</div>
+            <div class="admin-stat-label">Totaal beloftes</div>
+        </div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon">🏛</div>
+        <div class="admin-stat-body">
+            <div class="admin-stat-num">{{ stats.total_cabinets }}</div>
+            <div class="admin-stat-label">Kabinetten</div>
+        </div>
+    </div>
+    <div class="admin-stat-card">
+        <div class="admin-stat-icon">🏴</div>
+        <div class="admin-stat-body">
+            <div class="admin-stat-num">{{ stats.total_parties }}</div>
+            <div class="admin-stat-label">Partijen</div>
+        </div>
+    </div>
+    <div class="admin-stat-card stat-green">
+        <div class="admin-stat-icon">✅</div>
+        <div class="admin-stat-body">
+            <div class="admin-stat-num">{{ stats.fulfilled }}</div>
+            <div class="admin-stat-label">Waargemaakt</div>
+        </div>
+    </div>
+    <div class="admin-stat-card stat-yellow">
+        <div class="admin-stat-icon">🔄</div>
+        <div class="admin-stat-body">
+            <div class="admin-stat-num">{{ stats.in_progress }}</div>
+            <div class="admin-stat-label">In uitvoering</div>
+        </div>
+    </div>
+    <div class="admin-stat-card stat-red">
+        <div class="admin-stat-icon">❌</div>
+        <div class="admin-stat-body">
+            <div class="admin-stat-num">{{ stats.broken }}</div>
+            <div class="admin-stat-label">Gebroken</div>
+        </div>
+    </div>
+</div>
+
+<div class="admin-grid-2">
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h2>Recente beloftes</h2>
+            <a href="/admin/beloftes" class="btn btn-ghost btn-sm">Alle bekijken</a>
+        </div>
+        {% if recent_promises %}
+        <div class="admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Belofte</th>
+                        <th>Status</th>
+                        <th>Kabinet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in recent_promises %}
+                    <tr>
+                        <td><a href="/admin/beloftes/{{ p.id }}">{{ p.title[:60] }}{% if p.title|length > 60 %}...{% endif %}</a></td>
+                        <td><span class="status-badge status-{{ p.status.name }}">{{ p.status.value }}</span></td>
+                        <td>{% if p.cabinet %}{{ p.cabinet.name }}{% elif p.party %}{{ p.party.abbreviation }}{% else %}–{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="admin-empty">
+            <p>Nog geen beloftes. <a href="/admin/beloftes/nieuw">Voeg de eerste toe.</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h2>Snel starten</h2>
+        </div>
+        <div class="quick-actions">
+            <a href="/admin/beloftes/nieuw" class="quick-action-btn">
+                <span class="qa-icon">➕</span>
+                <div>
+                    <strong>Belofte toevoegen</strong>
+                    <p>Voeg een nieuwe politieke belofte toe</p>
+                </div>
+            </a>
+            <a href="/admin/kabinetten/nieuw" class="quick-action-btn">
+                <span class="qa-icon">🏛</span>
+                <div>
+                    <strong>Kabinet toevoegen</strong>
+                    <p>Registreer een nieuwe kabinetsperiode</p>
+                </div>
+            </a>
+            <a href="/admin/partijen/nieuw" class="quick-action-btn">
+                <span class="qa-icon">🏴</span>
+                <div>
+                    <strong>Partij toevoegen</strong>
+                    <p>Voeg een politieke partij toe</p>
+                </div>
+            </a>
+            <a href="/" target="_blank" class="quick-action-btn">
+                <span class="qa-icon">🌐</span>
+                <div>
+                    <strong>Publieke site bekijken</strong>
+                    <p>Open de publieke website in een nieuw tabblad</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}{{ promise.title[:60] }}{% endblock %}
+
+{% block content %}
+<div class="container page-body">
+    <div class="breadcrumb">
+        <a href="/">{{ _('nav.home') }}</a> / <a href="/beloftes">{{ _('nav.promises') }}</a> / <span>#{{ promise.id }}</span>
+    </div>
+
+    <div class="detail-layout">
+        <div class="detail-main">
+            <div class="detail-header">
+                <span class="status-badge status-{{ promise.status.name }} status-lg">{{ _('status.' + promise.status.name) }}</span>
+                <span class="detail-category">{{ promise.category }}</span>
+                <span class="promise-source-tag">{{ _('source.' + promise.source_kind.name) }}{% if promise.election_year %} {{ promise.election_year }}{% endif %}</span>
+            </div>
+            <h1 class="detail-title">{{ promise.title }}</h1>
+
+            <div class="detail-meta">
+                {% if promise.cabinet %}
+                <div class="meta-item">
+                    <span class="meta-icon">🏛</span>
+                    <a href="/kabinet/{{ promise.cabinet.id }}">{{ promise.cabinet.name }}</a>
+                    <span class="meta-period">({{ promise.cabinet.year_start }}–{{ promise.cabinet.year_end or _('common.until_now') }})</span>
+                </div>
+                {% endif %}
+                {% if promise.party %}
+                <div class="meta-item">
+                    <span class="meta-icon">🏴</span>
+                    <a href="/partij/{{ promise.party.id }}" style="color: {{ promise.party.color }}">{{ promise.party.name }} ({{ promise.party.abbreviation }})</a>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if promise.description %}
+            <div class="detail-section">
+                <h2>{{ _('promise.description') }}</h2>
+                <div class="detail-text">{{ promise.description }}</div>
+            </div>
+            {% endif %}
+
+            {% if promise.source_text %}
+            <div class="detail-section">
+                <h2>{{ _('promise.source_text') }}</h2>
+                <blockquote class="source-quote">{{ promise.source_text }}</blockquote>
+            </div>
+            {% endif %}
+
+            <!-- Evidence -->
+            <div class="detail-section">
+                <h2>{{ _('promise.evidence') }} ({{ promise.evidence|length }})</h2>
+                {% if promise.evidence %}
+                <div class="evidence-list">
+                    {% for ev in promise.evidence %}
+                    <div class="evidence-card">
+                        <div class="evidence-header">
+                            {% if ev.source_type %}<span class="evidence-type">{{ ev.source_type }}</span>{% endif %}
+                            {% if ev.date_published %}<span class="evidence-date">{{ ev.date_published.strftime('%d-%m-%Y') }}</span>{% endif %}
+                        </div>
+                        <h4 class="evidence-title">
+                            {% if ev.url %}<a href="{{ ev.url }}" target="_blank" rel="noopener">{{ ev.title }} ↗</a>
+                            {% else %}{{ ev.title }}{% endif %}
+                        </h4>
+                        {% if ev.description %}<p class="evidence-desc">{{ ev.description }}</p>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="no-evidence">{{ _('promise.evidence.none') }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="detail-sidebar">
+            <div class="sidebar-card">
+                <h3>{{ _('promise.info') }}</h3>
+                <dl class="info-list">
+                    {% if promise.cabinet %}
+                    <dt>{{ _('promises.cabinet') }}</dt>
+                    <dd><a href="/kabinet/{{ promise.cabinet.id }}">{{ promise.cabinet.name }}</a></dd>
+                    {% endif %}
+                    {% if promise.party %}
+                    <dt>{{ _('promises.party') }}</dt>
+                    <dd><a href="/partij/{{ promise.party.id }}" style="color: {{ promise.party.color }}">{{ promise.party.abbreviation }}</a></dd>
+                    {% endif %}
+                    {% if promise.election_year %}
+                    <dt>{{ _('promise.election_year') }}</dt>
+                    <dd>{{ promise.election_year }}</dd>
+                    {% endif %}
+                    <dt>{{ _('promises.source') }}</dt>
+                    <dd>{{ _('source.' + promise.source_kind.name) }}</dd>
+                    <dt>{{ _('promises.category') }}</dt>
+                    <dd>{{ promise.category }}</dd>
+                    <dt>{{ _('promises.status') }}</dt>
+                    <dd><span class="status-badge status-{{ promise.status.name }}">{{ _('status.' + promise.status.name) }}</span></dd>
+                </dl>
+            </div>
+
+            <a href="/admin/beloftes/{{ promise.id }}" class="btn btn-ghost btn-block">✏ {{ _('promise.edit') }}</a>
+        </aside>
+    </div>
+</div>
+{% endblock %}

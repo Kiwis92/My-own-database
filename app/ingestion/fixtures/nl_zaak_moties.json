@@ -1,0 +1,63 @@
+{
+  "@odata.context": "https://gegevensmagazijn.tweedekamer.nl/OData/v4/2.0/$metadata#Zaak(Besluit(Stemming()))",
+  "value": [
+    {
+      "Id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "Nummer": "2024Z19001",
+      "Soort": "Motie",
+      "Titel": "Motie van het lid over versnelling van de woningbouw",
+      "Onderwerp": "Verzoekt de regering de vergunningsprocedures voor woningbouwprojecten te verkorten tot maximaal zes maanden",
+      "GestartOp": "2024-11-21T00:00:00Z",
+      "Verwijderd": false,
+      "Besluit": [
+        {
+          "Id": "b1000000-0001-4000-8000-000000000001",
+          "BesluitTekst": "Aangenomen",
+          "Stemming": [
+            { "Id": "c1000000-0001-4000-8000-000000000001", "Soort": "Voor", "ActorFractie": "PVV", "FractieGrootte": 37, "Verwijderd": false },
+            { "Id": "c1000000-0002-4000-8000-000000000002", "Soort": "Voor", "ActorFractie": "GroenLinks-PvdA", "FractieGrootte": 25, "Verwijderd": false },
+            { "Id": "c1000000-0003-4000-8000-000000000003", "Soort": "Voor", "ActorFractie": "VVD", "FractieGrootte": 24, "Verwijderd": false },
+            { "Id": "c1000000-0004-4000-8000-000000000004", "Soort": "Voor", "ActorFractie": "NSC", "FractieGrootte": 20, "Verwijderd": false },
+            { "Id": "c1000000-0005-4000-8000-000000000005", "Soort": "Tegen", "ActorFractie": "D66", "FractieGrootte": 9, "Verwijderd": false },
+            { "Id": "c1000000-0006-4000-8000-000000000006", "Soort": "Voor", "ActorFractie": "BBB", "FractieGrootte": 7, "Verwijderd": false },
+            { "Id": "c1000000-0007-4000-8000-000000000007", "Soort": "Tegen", "ActorFractie": "CDA", "FractieGrootte": 5, "Verwijderd": false },
+            { "Id": "c1000000-0008-4000-8000-000000000008", "Soort": "Niet deelgenomen", "ActorFractie": "FVD", "FractieGrootte": 3, "Verwijderd": false }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "Nummer": "2024Z19002",
+      "Soort": "Motie",
+      "Titel": "Motie van het lid over verlaging van het eigen risico in de zorg",
+      "Onderwerp": "Verzoekt de regering het eigen risico per 2026 te bevriezen vooruitlopend op de verlaging naar 165 euro",
+      "GestartOp": "2024-11-19T00:00:00Z",
+      "Verwijderd": false,
+      "Besluit": [
+        {
+          "Id": "b1000000-0002-4000-8000-000000000002",
+          "BesluitTekst": "Aangenomen",
+          "Stemming": [
+            { "Id": "c2000000-0001-4000-8000-000000000001", "Soort": "Voor", "ActorFractie": "PVV", "FractieGrootte": 37, "Verwijderd": false },
+            { "Id": "c2000000-0002-4000-8000-000000000002", "Soort": "Voor", "ActorFractie": "SP", "FractieGrootte": 5, "Verwijderd": false },
+            { "Id": "c2000000-0003-4000-8000-000000000003", "Soort": "Voor", "ActorFractie": "GroenLinks-PvdA", "FractieGrootte": 25, "Verwijderd": false },
+            { "Id": "c2000000-0004-4000-8000-000000000004", "Soort": "Tegen", "ActorFractie": "VVD", "FractieGrootte": 24, "Verwijderd": false },
+            { "Id": "c2000000-0005-4000-8000-000000000005", "Soort": "Voor", "ActorFractie": "ChristenUnie", "FractieGrootte": 3, "Verwijderd": false },
+            { "Id": "c2000000-0006-4000-8000-000000000006", "Soort": "Onthouding", "ActorFractie": "SGP", "FractieGrootte": 3, "Verwijderd": false }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "Nummer": "2024Z19003",
+      "Soort": "Motie",
+      "Titel": "Motie zonder stemming (aangehouden)",
+      "Onderwerp": "Verzoekt de regering onderzoek te doen naar defensiesamenwerking",
+      "GestartOp": "2024-11-15T00:00:00Z",
+      "Verwijderd": false,
+      "Besluit": []
+    }
+  ]
+}

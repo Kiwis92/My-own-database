@@ -1,0 +1,23 @@
+{
+  "site.tagline": "Politisches Versprechens-Tracking",
+  "nav.home": "Start",
+  "nav.promises": "Versprechen",
+  "nav.parties": "Parteien",
+  "nav.cabinets": "Kabinette",
+  "nav.legal": "Rechtliches",
+  "nav.privacy": "Datenschutz",
+  "nav.cookies": "Cookies",
+  "nav.admin": "Verwaltung",
+  "legal.see_also": "Siehe auch",
+  "status.beloofd": "Versprochen",
+  "status.in_uitvoering": "In Umsetzung",
+  "status.deels_waargemaakt": "Teilweise erfüllt",
+  "status.waargemaakt": "Erfüllt",
+  "status.gebroken": "Gebrochen",
+  "status.geparkeerd": "Auf Eis",
+  "vote.voor": "Dafür",
+  "vote.tegen": "Dagegen",
+  "vote.onthouden": "Enthalten",
+  "vote.afwezig": "Abwesend",
+  "common.until_now": "heute"
+}

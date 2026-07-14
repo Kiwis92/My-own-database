@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+{% block title %}Kabinetten{% endblock %}
+{% block header_title %}Kabinetten{% endblock %}
+{% block header_actions %}<a href="/admin/kabinetten/nieuw" class="btn btn-primary">+ Kabinet toevoegen</a>{% endblock %}
+
+{% block content %}
+<div class="admin-card">
+    {% if cabinets %}
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Periode</th>
+                    <th>Coalitie</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cabinet in cabinets %}
+                <tr>
+                    <td><strong><a href="/kabinet/{{ cabinet.id }}">{{ cabinet.name }}</a></strong></td>
+                    <td>{{ cabinet.year_start }}{% if cabinet.year_end %} – {{ cabinet.year_end }}{% else %} – heden{% endif %}</td>
+                    <td>
+                        {% for party in cabinet.parties %}
+                        <span class="party-chip" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">{{ party.abbreviation }}</span>
+                        {% endfor %}
+                    </td>
+                    <td class="actions-cell">
+                        <a href="/admin/kabinetten/{{ cabinet.id }}/bewerk" class="btn btn-ghost btn-sm">Bewerken</a>
+                        <form method="post" action="/admin/kabinetten/{{ cabinet.id }}/verwijder" class="inline-form" onsubmit="return confirm('Weet je zeker dat je {{ cabinet.name }} wilt verwijderen?')">
+                            <button type="submit" class="btn btn-danger btn-sm">Verwijder</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="admin-empty">
+        <p>Nog geen kabinetten. <a href="/admin/kabinetten/nieuw">Voeg het eerste toe.</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

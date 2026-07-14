@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ _('cabinets.title') }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>{{ _('cabinets.title') }}</h1>
+        <p>{{ _('cabinets.subtitle') }}</p>
+    </div>
+</div>
+
+<div class="container page-body">
+    <div class="cabinets-grid">
+        {% for item in cabinet_stats %}
+        <a href="/kabinet/{{ item.cabinet.id }}" class="cabinet-detail-card">
+            <div class="cabinet-card-top">
+                <div class="cabinet-period">{{ item.cabinet.year_start }} – {{ item.cabinet.year_end or _('common.until_now') }}</div>
+                {% if not item.cabinet.end_date %}
+                <span class="cab-badge cab-current">{{ _('cabinets.current') }}</span>
+                {% elif item.cabinet.fell %}
+                <span class="cab-badge cab-fell">{{ _('cabinets.fell') }}</span>
+                {% endif %}
+            </div>
+            <h2 class="cabinet-name">{{ item.cabinet.name }}</h2>
+            {% if item.cabinet.premier %}<p class="cabinet-premier">{{ item.cabinet.premier }}</p>{% endif %}
+
+            {% if item.cabinet.parties %}
+            <div class="cabinet-parties">
+                {% for party in item.cabinet.parties %}
+                <span class="party-chip" style="background-color: {{ party.color }}20; color: {{ party.color }}; border: 1px solid {{ party.color }}40">{{ party.abbreviation }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if item.cabinet.fell and item.cabinet.fall_reason %}
+            <p class="cabinet-fall-reason">⚠ {{ item.cabinet.fall_reason[:140] }}{% if item.cabinet.fall_reason|length > 140 %}...{% endif %}</p>
+            {% endif %}
+
+            {% if item.total > 0 %}
+            <div class="cabinet-progress-wrap">
+                <div class="cabinet-progress-bar">
+                    <div class="progress-fill" style="width: {{ item.pct }}%"></div>
+                </div>
+                <div class="cabinet-progress-stats">
+                    <span>{{ _('cabinets.fulfilled_of', fulfilled=item.fulfilled, total=item.total) }}</span>
+                    <span class="pct-badge">{{ item.pct }}%</span>
+                </div>
+            </div>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
